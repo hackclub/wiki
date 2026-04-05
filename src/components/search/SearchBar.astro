@@ -64,15 +64,17 @@
     try {
       // @ts-ignore — Pagefind is injected at build time
       // eslint-disable-next-line
-      const { PagefindUI } = await import(/* @vite-ignore */ '/pagefind/pagefind-ui.js');
+      const { PagefindUI } = await import(
+        /* @vite-ignore */ "/pagefind/pagefind-ui.js"
+      );
       new PagefindUI({
-        element: '#pagefind-search',
+        element: "#pagefind-search",
         showSubResults: true,
         showImages: false,
         resetStyles: false,
       });
     } catch {
-      const el = document.getElementById('pagefind-search');
+      const el = document.getElementById("pagefind-search");
       if (el) {
         el.innerHTML = `
           <p style="color:var(--muted);font-size:0.9rem;padding:1rem 0">

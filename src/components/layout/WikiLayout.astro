@@ -1,7 +1,7 @@
 ---
-import Sidebar from './Sidebar.astro';
-import TableOfContents from './TableOfContents.astro';
-import Footer from './Footer.astro';
+import Sidebar from "./Sidebar.astro";
+import TableOfContents from "./TableOfContents.astro";
+import Footer from "./Footer.astro";
 
 export interface Props {
   headings?: { depth: number; slug: string; text: string }[];
@@ -25,17 +25,37 @@ const isWide = !showToc;
   <div class="wiki-main">
     <!-- Mobile header bar -->
     <div class="mobile-header">
-      <button class="hamburger" id="hamburger-btn" aria-label="Toggle sidebar" aria-expanded="false">
+      <button
+        class="hamburger"
+        id="hamburger-btn"
+        aria-label="Toggle sidebar"
+        aria-expanded="false"
+      >
         <span></span>
         <span></span>
         <span></span>
       </button>
       <a href="/" class="mobile-logo">
-        <svg width="22" height="22" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="100" height="100" rx="20" fill="#ec3750"/>
-          <rect x="34" y="21" width="5" height="62" rx="2.5" fill="white" opacity="0.95"/>
-          <path d="M39 23 L79 37 L39 52 Z" fill="white"/>
-          <ellipse cx="36.5" cy="85" rx="15" ry="5" fill="white" opacity="0.2"/>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 100 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <rect width="100" height="100" rx="20" fill="#ec3750"></rect>
+          <rect
+            x="34"
+            y="21"
+            width="5"
+            height="62"
+            rx="2.5"
+            fill="white"
+            opacity="0.95"></rect>
+          <path d="M39 23 L79 37 L39 52 Z" fill="white"></path>
+          <ellipse cx="36.5" cy="85" rx="15" ry="5" fill="white" opacity="0.2"
+          ></ellipse>
         </svg>
         <span>Hack Club Wiki</span>
       </a>
@@ -43,15 +63,20 @@ const isWide = !showToc;
 
     <!-- Content + TOC row -->
     <div class="wiki-content-row">
-      <main class:list={['wiki-article', { 'wiki-article--wide': isWide }]} id="main-content">
+      <main
+        class:list={["wiki-article", { "wiki-article--wide": isWide }]}
+        id="main-content"
+      >
         <slot />
       </main>
 
-      {showToc && headings.length > 1 && (
-        <aside class="wiki-toc" aria-label="Table of contents">
-          <TableOfContents headings={headings} />
-        </aside>
-      )}
+      {
+        showToc && headings.length > 1 && (
+          <aside class="wiki-toc" aria-label="Table of contents">
+            <TableOfContents headings={headings} />
+          </aside>
+        )
+      }
     </div>
 
     <Footer />
@@ -230,32 +255,32 @@ const isWide = !showToc;
 </style>
 
 <script>
-  const hamburger = document.getElementById('hamburger-btn');
-  const sidebar = document.getElementById('wiki-sidebar');
-  const overlay = document.getElementById('sidebar-overlay');
+  const hamburger = document.getElementById("hamburger-btn");
+  const sidebar = document.getElementById("wiki-sidebar");
+  const overlay = document.getElementById("sidebar-overlay");
 
   function openSidebar() {
-    sidebar?.classList.add('open');
-    overlay?.classList.add('open');
-    hamburger?.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
+    sidebar?.classList.add("open");
+    overlay?.classList.add("open");
+    hamburger?.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
   }
 
   function closeSidebar() {
-    sidebar?.classList.remove('open');
-    overlay?.classList.remove('open');
-    hamburger?.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
+    sidebar?.classList.remove("open");
+    overlay?.classList.remove("open");
+    hamburger?.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
   }
 
-  hamburger?.addEventListener('click', () => {
-    const isOpen = sidebar?.classList.contains('open');
+  hamburger?.addEventListener("click", () => {
+    const isOpen = sidebar?.classList.contains("open");
     isOpen ? closeSidebar() : openSidebar();
   });
 
-  overlay?.addEventListener('click', closeSidebar);
+  overlay?.addEventListener("click", closeSidebar);
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeSidebar();
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeSidebar();
   });
 </script>

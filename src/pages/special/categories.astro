@@ -1,42 +1,49 @@
 ---
-import { getCollection } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import WikiLayout from '../../components/layout/WikiLayout.astro';
-import Breadcrumb from '../../components/layout/Breadcrumb.astro';
-import { getCategories, categorySlug } from '../../lib/getCategories';
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import WikiLayout from "../../components/layout/WikiLayout.astro";
+import Breadcrumb from "../../components/layout/Breadcrumb.astro";
+import { getCategories, categorySlug } from "../../lib/getCategories";
 
-const pages = await getCollection('wiki');
+const pages = await getCollection("wiki");
 const categories = getCategories(pages);
 const sortedCats = Object.keys(categories).sort((a, b) => a.localeCompare(b));
 ---
 
 <Base title="Categories" description="All categories in the Hack Club Wiki.">
   <WikiLayout showToc={false}>
-    <Breadcrumb crumbs={[{ label: 'Categories' }]} />
+    <Breadcrumb crumbs={[{ label: "Categories" }]} />
 
     <header class="special-header">
       <h1>Categories</h1>
-      <p class="special-desc">{sortedCats.length} categories across {pages.length} articles.</p>
+      <p class="special-desc">
+        {sortedCats.length} categories across {pages.length} articles.
+      </p>
     </header>
 
     <div class="cat-grid">
-      {sortedCats.map((cat) => {
-        const catPages = categories[cat];
-        return (
-          <a href={`/category/${categorySlug(cat)}`} class="cat-card">
-            <div class="cat-card-name">{cat}</div>
-            <div class="cat-card-count">{catPages.length} {catPages.length === 1 ? 'article' : 'articles'}</div>
-            <ul class="cat-card-pages" aria-label={`Pages in ${cat}`}>
-              {catPages.slice(0, 4).map((p) => (
-                <li>{p.data.title}</li>
-              ))}
-              {catPages.length > 4 && (
-                <li class="cat-card-more">+{catPages.length - 4} more</li>
-              )}
-            </ul>
-          </a>
-        );
-      })}
+      {
+        sortedCats.map((cat) => {
+          const catPages = categories[cat];
+          return (
+            <a href={`/category/${categorySlug(cat)}`} class="cat-card">
+              <div class="cat-card-name">{cat}</div>
+              <div class="cat-card-count">
+                {catPages.length}{" "}
+                {catPages.length === 1 ? "article" : "articles"}
+              </div>
+              <ul class="cat-card-pages" aria-label={`Pages in ${cat}`}>
+                {catPages.slice(0, 4).map((p) => (
+                  <li>{p.data.title}</li>
+                ))}
+                {catPages.length > 4 && (
+                  <li class="cat-card-more">+{catPages.length - 4} more</li>
+                )}
+              </ul>
+            </a>
+          );
+        })
+      }
     </div>
   </WikiLayout>
 </Base>
@@ -73,7 +80,9 @@ const sortedCats = Object.keys(categories).sort((a, b) => a.localeCompare(b));
     padding: 1.25rem;
     text-decoration: none;
     color: var(--text);
-    transition: border-color 0.15s ease, transform 0.1s ease;
+    transition:
+      border-color 0.15s ease,
+      transform 0.1s ease;
   }
 
   .cat-card:hover {

@@ -35,8 +35,8 @@ Optional fields:
 ```yaml
 tags: ["tag1", "tag2"]
 related: ["other-article-slug"]
-stub: true          # marks article as needing expansion
-featured: true      # shows on homepage
+stub: true # marks article as needing expansion
+featured: true # shows on homepage
 lastEdited: 2024-01-15
 ---
 ```
@@ -76,7 +76,7 @@ Use Markdown tables for structured data:
 
 ```md
 | Column 1 | Column 2 |
-|----------|----------|
+| -------- | -------- |
 | Data     | Data     |
 ```
 

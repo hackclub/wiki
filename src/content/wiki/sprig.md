@@ -34,13 +34,14 @@ Sprig games are written in JavaScript using a simple grid-based API:
 ```js
 const player = "p";
 
-setLegend(
-  [player, bitmap`
+setLegend([
+  player,
+  bitmap`
 0000000000000000
 0000000000000000
 0000000HHH000000
-...`]
-);
+...`,
+]);
 
 setSolids([player]);
 
@@ -48,7 +49,7 @@ let level = 0;
 const levels = [
   map`
 p.
-..`
+..`,
 ];
 
 setMap(levels[level]);

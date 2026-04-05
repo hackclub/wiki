@@ -35,12 +35,12 @@ Hack Club is a worldwide network of high school coding clubs where members learn
 
 Hack Club runs a number of flagship programs:
 
-| Program | Description |
-|---------|-------------|
+| Program        | Description                               |
+| -------------- | ----------------------------------------- |
 | [[Hackathons]] | Free, in-person events for high schoolers |
-| [[Arcade]] | Summer coding program |
-| [[Sprig]] | Build games, get a free console |
-| [[Blot]] | Build a drawing machine |
+| [[Arcade]]     | Summer coding program                     |
+| [[Sprig]]      | Build games, get a free console           |
+| [[Blot]]       | Build a drawing machine                   |
 
 ## Contributing
 

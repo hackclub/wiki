@@ -7,26 +7,28 @@ const { headings } = Astro.props;
 const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 ---
 
-{tocHeadings.length > 0 && (
-  <div class="toc-wrapper" id="toc-wrapper">
-    <p class="toc-title">On this page</p>
-    <nav aria-label="Table of contents">
-      <ul class="toc-list" role="list">
-        {tocHeadings.map((heading) => (
-          <li class:list={['toc-item', `toc-depth-${heading.depth}`]}>
-            <a
-              href={`#${heading.slug}`}
-              class="toc-link"
-              data-heading-id={heading.slug}
-            >
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  </div>
-)}
+{
+  tocHeadings.length > 0 && (
+    <div class="toc-wrapper" id="toc-wrapper">
+      <p class="toc-title">On this page</p>
+      <nav aria-label="Table of contents">
+        <ul class="toc-list" role="list">
+          {tocHeadings.map((heading) => (
+            <li class:list={["toc-item", `toc-depth-${heading.depth}`]}>
+              <a
+                href={`#${heading.slug}`}
+                class="toc-link"
+                data-heading-id={heading.slug}
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  )
+}
 
 <style>
   .toc-wrapper {
@@ -67,7 +69,9 @@ const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
     border-left: 2px solid transparent;
     margin-left: -2px;
     line-height: 1.4;
-    transition: color 0.15s ease, border-color 0.15s ease;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -90,28 +94,32 @@ const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 </style>
 
 <script>
-  const links = document.querySelectorAll<HTMLAnchorElement>('.toc-link[data-heading-id]');
+  const links = document.querySelectorAll<HTMLAnchorElement>(
+    ".toc-link[data-heading-id]",
+  );
 
   if (links.length > 0) {
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            links.forEach((l) => l.classList.remove('active'));
-            const id = entry.target.getAttribute('id');
+            links.forEach((l) => l.classList.remove("active"));
+            const id = entry.target.getAttribute("id");
             const active = document.querySelector<HTMLAnchorElement>(
-              `.toc-link[data-heading-id="${id}"]`
+              `.toc-link[data-heading-id="${id}"]`,
             );
-            active?.classList.add('active');
+            active?.classList.add("active");
           }
         }
       },
-      { rootMargin: '-20% 0% -70% 0%', threshold: 0 }
+      { rootMargin: "-20% 0% -70% 0%", threshold: 0 },
     );
 
-    document.querySelectorAll('h2[id], h3[id]').forEach((h) => observer.observe(h));
+    document
+      .querySelectorAll("h2[id], h3[id]")
+      .forEach((h) => observer.observe(h));
 
     // Activate first link by default
-    if (links[0]) links[0].classList.add('active');
+    if (links[0]) links[0].classList.add("active");
   }
 </script>

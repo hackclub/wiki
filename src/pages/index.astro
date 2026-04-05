@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-import Base from '../layouts/Base.astro';
-import WikiLayout from '../components/layout/WikiLayout.astro';
-import { getCategories, categorySlug } from '../lib/getCategories';
-import { getRecentChanges } from '../lib/getRecentChanges';
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import WikiLayout from "../components/layout/WikiLayout.astro";
+import { getCategories, categorySlug } from "../lib/getCategories";
+import { getRecentChanges } from "../lib/getRecentChanges";
 
-const allPages = await getCollection('wiki');
+const allPages = await getCollection("wiki");
 const featured = allPages.filter((p) => p.data.featured);
 const categories = getCategories(allPages);
 const sortedCats = Object.keys(categories).sort();
@@ -16,7 +16,7 @@ const catIcons: Record<string, string> = {
   clubs: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
   community: `<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>`,
   events: `<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>`,
-  'getting-started': `<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>`,
+  "getting-started": `<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>`,
   hardware: `<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>`,
   meta: `<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>`,
   projects: `<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>`,
@@ -24,7 +24,7 @@ const catIcons: Record<string, string> = {
 };
 
 function getCatIcon(cat: string): string {
-  const key = cat.toLowerCase().replace(/\s+/g, '-');
+  const key = cat.toLowerCase().replace(/\s+/g, "-");
   return catIcons[key] ?? `<path d="M3 7h18M3 12h18M3 17h12"/>`;
 }
 ---
@@ -40,10 +40,20 @@ function getCatIcon(cat: string): string {
       <div class="hero-content">
         <div class="hero-eyebrow">
           <span class="hero-badge">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-              <path d="M2 17l10 5 10-5"/>
-              <path d="M2 12l10 5 10-5"/>
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
             </svg>
             Community Wiki
           </span>
@@ -53,21 +63,46 @@ function getCatIcon(cat: string): string {
           <span class="hero-title-wiki">Wiki</span>
         </h1>
         <p class="hero-desc">
-          The community-maintained knowledge base for Hack Club. Find everything about clubs, hackathons, programs, and the people who make it happen.
+          The community-maintained knowledge base for Hack Club. Find everything
+          about clubs, hackathons, programs, and the people who make it happen.
         </p>
         <div class="hero-actions">
           <a href="/wiki/getting-started" class="hero-btn hero-btn--primary">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
-              <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+              ></path>
+              <path
+                d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+              ></path>
             </svg>
             Get Started
           </a>
           <a href="/special/all-pages" class="hero-btn hero-btn--ghost">
             Browse All Pages
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </a>
         </div>
@@ -76,35 +111,67 @@ function getCatIcon(cat: string): string {
       <div class="hero-visual" aria-hidden="true">
         <div class="hero-mascot-ring"></div>
         <div class="hero-mascot-inner">
-          <svg width="160" height="160" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            width="160"
+            height="160"
+            viewBox="0 0 200 200"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <defs>
               <radialGradient id="bg-glow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#ec3750" stop-opacity="0.3"/>
-                <stop offset="100%" stop-color="#ec3750" stop-opacity="0"/>
+                <stop offset="0%" stop-color="#ec3750" stop-opacity="0.3"
+                ></stop>
+                <stop offset="100%" stop-color="#ec3750" stop-opacity="0"
+                ></stop>
               </radialGradient>
               <linearGradient id="flag-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#ec3750"/>
-                <stop offset="100%" stop-color="#ff6b7a"/>
+                <stop offset="0%" stop-color="#ec3750"></stop>
+                <stop offset="100%" stop-color="#ff6b7a"></stop>
               </linearGradient>
-              <linearGradient id="ground-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#33d6a6" stop-opacity="0.5"/>
-                <stop offset="100%" stop-color="#33d6a6" stop-opacity="0.1"/>
+              <linearGradient
+                id="ground-grad"
+                x1="0%"
+                y1="0%"
+                x2="0%"
+                y2="100%"
+              >
+                <stop offset="0%" stop-color="#33d6a6" stop-opacity="0.5"
+                ></stop>
+                <stop offset="100%" stop-color="#33d6a6" stop-opacity="0.1"
+                ></stop>
               </linearGradient>
             </defs>
             <!-- Background glow -->
-            <circle cx="100" cy="100" r="88" fill="url(#bg-glow)"/>
+            <circle cx="100" cy="100" r="88" fill="url(#bg-glow)"></circle>
             <!-- Ground -->
-            <ellipse cx="100" cy="158" rx="52" ry="14" fill="url(#ground-grad)"/>
+            <ellipse cx="100" cy="158" rx="52" ry="14" fill="url(#ground-grad)"
+            ></ellipse>
             <!-- Ground ring -->
-            <ellipse cx="100" cy="158" rx="30" ry="8" fill="#33d6a6" opacity="0.15"/>
+            <ellipse
+              cx="100"
+              cy="158"
+              rx="30"
+              ry="8"
+              fill="#33d6a6"
+              opacity="0.15"></ellipse>
             <!-- Pole -->
-            <rect x="96.5" y="50" width="5" height="108" rx="2.5" fill="white" opacity="0.92"/>
+            <rect
+              x="96.5"
+              y="50"
+              width="5"
+              height="108"
+              rx="2.5"
+              fill="white"
+              opacity="0.92"></rect>
             <!-- Flag -->
-            <path d="M101.5 52 L158 72 L101.5 94 Z" fill="url(#flag-grad)"/>
+            <path d="M101.5 52 L158 72 L101.5 94 Z" fill="url(#flag-grad)"
+            ></path>
             <!-- Flag shine -->
-            <path d="M101.5 52 L158 72 L135 63 Z" fill="white" opacity="0.12"/>
+            <path d="M101.5 52 L158 72 L135 63 Z" fill="white" opacity="0.12"
+            ></path>
             <!-- Base circle -->
-            <circle cx="99" cy="158" r="6" fill="white" opacity="0.35"/>
+            <circle cx="99" cy="158" r="6" fill="white" opacity="0.35"></circle>
           </svg>
         </div>
       </div>
@@ -112,47 +179,118 @@ function getCatIcon(cat: string): string {
 
     <!-- Quick stats bar -->
     <div class="stats-bar">
-      <a href="/special/all-pages" class="stat" aria-label="{allPages.length} articles">
+      <a
+        href="/special/all-pages"
+        class="stat"
+        aria-label="{allPages.length} articles"
+      >
         <div class="stat-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+            ></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
           </svg>
         </div>
         <span class="stat-n">{allPages.length}</span>
         <span class="stat-label">Articles</span>
       </a>
       <div class="stat-divider" aria-hidden="true"></div>
-      <a href="/special/categories" class="stat" aria-label="{sortedCats.length} categories">
+      <a
+        href="/special/categories"
+        class="stat"
+        aria-label="{sortedCats.length} categories"
+      >
         <div class="stat-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="3" y="3" width="7" height="7"></rect><rect
+              x="14"
+              y="3"
+              width="7"
+              height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect><rect
+              x="3"
+              y="14"
+              width="7"
+              height="7"></rect>
           </svg>
         </div>
         <span class="stat-n">{sortedCats.length}</span>
         <span class="stat-label">Categories</span>
       </a>
       <div class="stat-divider" aria-hidden="true"></div>
-      <a href="https://hackclub.com/clubs" class="stat" target="_blank" rel="noopener" aria-label="600+ clubs worldwide">
+      <a
+        href="https://hackclub.com/clubs"
+        class="stat"
+        target="_blank"
+        rel="noopener"
+        aria-label="600+ clubs worldwide"
+      >
         <div class="stat-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path
+              d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+            ></path>
           </svg>
         </div>
         <span class="stat-n">600+</span>
         <span class="stat-label">Clubs worldwide</span>
       </a>
       <div class="stat-divider" aria-hidden="true"></div>
-      <a href="https://hackclub.com/slack" class="stat" target="_blank" rel="noopener" aria-label="50k+ members">
+      <a
+        href="https://hackclub.com/slack"
+        class="stat"
+        target="_blank"
+        rel="noopener"
+        aria-label="50k+ members"
+      >
         <div class="stat-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
           </svg>
         </div>
         <span class="stat-n">50k+</span>
@@ -161,48 +299,79 @@ function getCatIcon(cat: string): string {
     </div>
 
     <!-- Featured Articles -->
-    {featured.length > 0 && (
-      <section class="home-section">
-        <div class="section-header">
-          <h2 class="section-title">Featured Articles</h2>
-          <a href="/special/all-pages" class="section-more">
-            All pages
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </a>
-        </div>
-        <div class="featured-grid">
-          {featured.map((page) => (
-            <a href={`/wiki/${page.id}`} class="featured-card">
-              <div class="featured-card-top">
-                <div class="featured-card-cats">
-                  {page.data.categories.slice(0, 2).map((c: string) => (
-                    <span class="featured-cat">{c}</span>
-                  ))}
-                </div>
-                <div class="featured-card-arrow" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                    <polyline points="12 5 19 12 12 19"/>
-                  </svg>
-                </div>
-              </div>
-              <h3 class="featured-card-title">{page.data.title}</h3>
-              <p class="featured-card-desc">{page.data.description}</p>
-              <span class="featured-read">
-                Read article
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"/>
-                  <polyline points="12 5 19 12 12 19"/>
-                </svg>
-              </span>
+    {
+      featured.length > 0 && (
+        <section class="home-section">
+          <div class="section-header">
+            <h2 class="section-title">Featured Articles</h2>
+            <a href="/special/all-pages" class="section-more">
+              All pages
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
             </a>
-          ))}
-        </div>
-      </section>
-    )}
+          </div>
+          <div class="featured-grid">
+            {featured.map((page) => (
+              <a href={`/wiki/${page.id}`} class="featured-card">
+                <div class="featured-card-top">
+                  <div class="featured-card-cats">
+                    {page.data.categories.slice(0, 2).map((c: string) => (
+                      <span class="featured-cat">{c}</span>
+                    ))}
+                  </div>
+                  <div class="featured-card-arrow" aria-hidden="true">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="featured-card-title">{page.data.title}</h3>
+                <p class="featured-card-desc">{page.data.description}</p>
+                <span class="featured-read">
+                  Read article
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
 
     <!-- Browse by Category -->
     <section class="home-section">
@@ -210,23 +379,46 @@ function getCatIcon(cat: string): string {
         <h2 class="section-title">Browse by Category</h2>
         <a href="/special/categories" class="section-more">
           All categories
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </a>
       </div>
       <div class="cat-tags">
-        {sortedCats.map((cat) => {
-          const icon = getCatIcon(cat);
-          return (
-            <a href={`/category/${categorySlug(cat)}`} class="cat-tag">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icon} />
-              {cat}
-              <span class="cat-tag-count">{categories[cat].length}</span>
-            </a>
-          );
-        })}
+        {
+          sortedCats.map((cat) => {
+            const icon = getCatIcon(cat);
+            return (
+              <a href={`/category/${categorySlug(cat)}`} class="cat-tag">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  set:html={icon}
+                />
+                {cat}
+                <span class="cat-tag-count">{categories[cat].length}</span>
+              </a>
+            );
+          })
+        }
       </div>
     </section>
 
@@ -236,43 +428,74 @@ function getCatIcon(cat: string): string {
         <h2 class="section-title">Recent Changes</h2>
         <a href="/special/recent-changes" class="section-more">
           View all
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </a>
       </div>
 
-      {recentChanges.length === 0 ? (
-        <div class="recent-empty">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-          <p>Recent changes will appear here once wiki articles have been committed to git.</p>
-        </div>
-      ) : (
-        <ul class="recent-list" role="list">
-          {recentChanges.map((change) => (
-            <li class="recent-item">
-              <div class="recent-meta">
-                <span class="recent-author">{change.author}</span>
-                <span class="recent-sep" aria-hidden="true">·</span>
-                <time class="recent-time" datetime={change.date}>{change.relativeDate}</time>
-              </div>
-              <p class="recent-msg">{change.message}</p>
-              {change.files.length > 0 && (
-                <div class="recent-files">
-                  {change.files.slice(0, 3).map((f: string) => (
-                    <a href={`/wiki/${f}`} class="recent-file">{f}</a>
-                  ))}
+      {
+        recentChanges.length === 0 ? (
+          <div class="recent-empty">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <p>
+              Recent changes will appear here once wiki articles have been
+              committed to git.
+            </p>
+          </div>
+        ) : (
+          <ul class="recent-list" role="list">
+            {recentChanges.map((change) => (
+              <li class="recent-item">
+                <div class="recent-meta">
+                  <span class="recent-author">{change.author}</span>
+                  <span class="recent-sep" aria-hidden="true">
+                    ·
+                  </span>
+                  <time class="recent-time" datetime={change.date}>
+                    {change.relativeDate}
+                  </time>
                 </div>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
+                <p class="recent-msg">{change.message}</p>
+                {change.files.length > 0 && (
+                  <div class="recent-files">
+                    {change.files.slice(0, 3).map((f: string) => (
+                      <a href={`/wiki/${f}`} class="recent-file">
+                        {f}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        )
+      }
     </section>
   </WikiLayout>
 </Base>
@@ -299,7 +522,11 @@ function getCatIcon(cat: string): string {
       linear-gradient(90deg, var(--border) 1px, transparent 1px);
     background-size: 40px 40px;
     opacity: 0.25;
-    mask-image: radial-gradient(ellipse 60% 100% at 80% 50%, black 20%, transparent 70%);
+    mask-image: radial-gradient(
+      ellipse 60% 100% at 80% 50%,
+      black 20%,
+      transparent 70%
+    );
     pointer-events: none;
   }
 
@@ -332,7 +559,7 @@ function getCatIcon(cat: string): string {
   .hero-title {
     font-size: clamp(2.25rem, 5vw, 3.5rem);
     font-weight: 900;
-    line-height: 1.0;
+    line-height: 1;
     margin-bottom: 1rem;
     letter-spacing: -0.025em;
   }
@@ -412,13 +639,24 @@ function getCatIcon(cat: string): string {
     position: absolute;
     inset: -16px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(236, 55, 80, 0.12) 0%, transparent 70%);
+    background: radial-gradient(
+      circle,
+      rgba(236, 55, 80, 0.12) 0%,
+      transparent 70%
+    );
     animation: pulse-ring 3s ease-in-out infinite;
   }
 
   @keyframes pulse-ring {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.06); opacity: 0.7; }
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.06);
+      opacity: 0.7;
+    }
   }
 
   .hero-mascot-inner {
@@ -428,8 +666,13 @@ function getCatIcon(cat: string): string {
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-14px); }
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
   }
 
   /* ---- Stats bar ---- */
@@ -522,7 +765,9 @@ function getCatIcon(cat: string): string {
     color: var(--red);
     text-decoration: none;
     font-weight: 600;
-    transition: gap var(--transition-fast), color var(--transition-fast);
+    transition:
+      gap var(--transition-fast),
+      color var(--transition-fast);
   }
 
   .section-more:hover {
@@ -546,14 +791,17 @@ function getCatIcon(cat: string): string {
     padding: 1.25rem;
     text-decoration: none;
     color: var(--text);
-    transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+    transition:
+      border-color var(--transition-base),
+      box-shadow var(--transition-base),
+      transform var(--transition-base);
     cursor: pointer;
     position: relative;
     overflow: hidden;
   }
 
   .featured-card::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -566,7 +814,9 @@ function getCatIcon(cat: string): string {
 
   .featured-card:hover {
     border-color: var(--border-hover);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(236, 55, 80, 0.08);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(236, 55, 80, 0.08);
     transform: translateY(-2px);
   }
 
@@ -603,7 +853,10 @@ function getCatIcon(cat: string): string {
     color: var(--muted);
     opacity: 0;
     transform: translateX(-4px);
-    transition: opacity var(--transition-base), transform var(--transition-base), color var(--transition-base);
+    transition:
+      opacity var(--transition-base),
+      transform var(--transition-base),
+      color var(--transition-base);
     flex-shrink: 0;
   }
 

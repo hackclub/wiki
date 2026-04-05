@@ -1,28 +1,28 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import { readdirSync, existsSync } from 'fs';
-import remarkWikiLink from 'remark-wiki-link';
+import { defineConfig } from "astro/config";
+import { readdirSync, existsSync } from "fs";
+import remarkWikiLink from "remark-wiki-link";
 
 function getWikiPermalinks() {
-  const dir = 'src/content/wiki';
+  const dir = "src/content/wiki";
   if (!existsSync(dir)) return [];
   return readdirSync(dir)
-    .filter((f) => f.endsWith('.md'))
-    .map((f) => f.replace(/\.md$/, ''));
+    .filter((f) => f.endsWith(".md"))
+    .map((f) => f.replace(/\.md$/, ""));
 }
 
 export default defineConfig({
-  output: 'static',
-  site: 'https://wiki.hackclub.com',
+  output: "static",
+  site: "https://wiki.hackclub.com",
   vite: {
     define: {
       GITHUB_EDIT_BASE: JSON.stringify(
-        'https://github.com/hackclub/wiki/edit/main/src/content/wiki/'
+        "https://github.com/hackclub/wiki/edit/main/src/content/wiki/",
       ),
     },
     build: {
       rollupOptions: {
-        external: ['/pagefind/pagefind-ui.js', '/pagefind/pagefind.js'],
+        external: ["/pagefind/pagefind-ui.js", "/pagefind/pagefind.js"],
       },
     },
   },
@@ -32,10 +32,10 @@ export default defineConfig({
         remarkWikiLink,
         {
           permalinks: getWikiPermalinks(),
-          pageResolver: (name) => [name.toLowerCase().replace(/\s+/g, '-')],
+          pageResolver: (name) => [name.toLowerCase().replace(/\s+/g, "-")],
           hrefTemplate: (p) => `/wiki/${p}`,
-          wikiLinkClassName: 'wiki-link',
-          newClassName: 'wiki-link--new',
+          wikiLinkClassName: "wiki-link",
+          newClassName: "wiki-link--new",
         },
       ],
     ],

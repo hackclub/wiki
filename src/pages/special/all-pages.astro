@@ -1,19 +1,22 @@
 ---
-import { getCollection } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import WikiLayout from '../../components/layout/WikiLayout.astro';
-import Breadcrumb from '../../components/layout/Breadcrumb.astro';
-import { getAlphabeticalGroups } from '../../lib/getAllPages';
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import WikiLayout from "../../components/layout/WikiLayout.astro";
+import Breadcrumb from "../../components/layout/Breadcrumb.astro";
+import { getAlphabeticalGroups } from "../../lib/getAllPages";
 
-const pages = await getCollection('wiki');
+const pages = await getCollection("wiki");
 const groups = getAlphabeticalGroups(pages);
 const letters = Object.keys(groups).sort();
 const total = pages.length;
 ---
 
-<Base title="All Pages" description={`Alphabetical index of all ${total} wiki articles.`}>
+<Base
+  title="All Pages"
+  description={`Alphabetical index of all ${total} wiki articles.`}
+>
   <WikiLayout showToc={false}>
-    <Breadcrumb crumbs={[{ label: 'All Pages' }]} />
+    <Breadcrumb crumbs={[{ label: "All Pages" }]} />
 
     <header class="special-header">
       <h1>All Pages</h1>
@@ -22,28 +25,40 @@ const total = pages.length;
 
     <!-- Letter quick-jump -->
     <div class="letter-jump" aria-label="Jump to letter">
-      {letters.map((l) => (
-        <a href={`#letter-${l}`} class="letter-btn">{l}</a>
-      ))}
+      {
+        letters.map((l) => (
+          <a href={`#letter-${l}`} class="letter-btn">
+            {l}
+          </a>
+        ))
+      }
     </div>
 
     <!-- Article groups -->
-    {letters.map((letter) => (
-      <section class="alpha-group" id={`letter-${letter}`}>
-        <h2 class="alpha-letter">{letter}</h2>
-        <ul class="alpha-list" role="list">
-          {groups[letter].map((page) => (
-            <li class="alpha-item">
-              <a href={`/wiki/${page.id}`} class="alpha-link">
-                {page.data.title}
-                {page.data.stub && <span class="stub-dot" title="Stub article" aria-label="stub"></span>}
-              </a>
-              <span class="alpha-desc">{page.data.description}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))}
+    {
+      letters.map((letter) => (
+        <section class="alpha-group" id={`letter-${letter}`}>
+          <h2 class="alpha-letter">{letter}</h2>
+          <ul class="alpha-list" role="list">
+            {groups[letter].map((page) => (
+              <li class="alpha-item">
+                <a href={`/wiki/${page.id}`} class="alpha-link">
+                  {page.data.title}
+                  {page.data.stub && (
+                    <span
+                      class="stub-dot"
+                      title="Stub article"
+                      aria-label="stub"
+                    />
+                  )}
+                </a>
+                <span class="alpha-desc">{page.data.description}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
   </WikiLayout>
 </Base>
 

@@ -1,16 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import WikiLayout from '../../components/layout/WikiLayout.astro';
-import Breadcrumb from '../../components/layout/Breadcrumb.astro';
-import { getCategories, categoryFromSlug } from '../../lib/getCategories';
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import WikiLayout from "../../components/layout/WikiLayout.astro";
+import Breadcrumb from "../../components/layout/Breadcrumb.astro";
+import { getCategories, categoryFromSlug } from "../../lib/getCategories";
 
 export async function getStaticPaths() {
-  const pages = await getCollection('wiki');
+  const pages = await getCollection("wiki");
   const categories = getCategories(pages);
 
   return Object.keys(categories).map((cat) => ({
-    params: { category: cat.toLowerCase().replace(/\s+/g, '-') },
+    params: { category: cat.toLowerCase().replace(/\s+/g, "-") },
     props: { pages: categories[cat], categoryName: cat },
   }));
 }
@@ -23,26 +23,36 @@ const { pages, categoryName } = Astro.props;
   description={`All wiki articles in the ${categoryName} category.`}
 >
   <WikiLayout showToc={false}>
-    <Breadcrumb crumbs={[{ label: 'Categories', href: '/special/categories' }, { label: categoryName }]} />
+    <Breadcrumb
+      crumbs={[
+        { label: "Categories", href: "/special/categories" },
+        { label: categoryName },
+      ]}
+    />
 
     <header class="cat-header">
       <p class="cat-eyebrow">Category</p>
       <h1 class="cat-title">{categoryName}</h1>
-      <p class="cat-count">{pages.length} {pages.length === 1 ? 'article' : 'articles'}</p>
+      <p class="cat-count">
+        {pages.length}
+        {pages.length === 1 ? "article" : "articles"}
+      </p>
     </header>
 
     <ul class="page-list" role="list">
-      {pages.map((page) => (
-        <li class="page-list-item">
-          <a href={`/wiki/${page.id}`} class="page-list-link">
-            <div class="page-list-info">
-              <span class="page-list-title">{page.data.title}</span>
-              {page.data.stub && <span class="stub-badge">stub</span>}
-            </div>
-            <p class="page-list-desc">{page.data.description}</p>
-          </a>
-        </li>
-      ))}
+      {
+        pages.map((page) => (
+          <li class="page-list-item">
+            <a href={`/wiki/${page.id}`} class="page-list-link">
+              <div class="page-list-info">
+                <span class="page-list-title">{page.data.title}</span>
+                {page.data.stub && <span class="stub-badge">stub</span>}
+              </div>
+              <p class="page-list-desc">{page.data.description}</p>
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </WikiLayout>
 </Base>

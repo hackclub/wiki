@@ -43,9 +43,9 @@ Hack Club is **not** a class, a bootcamp, or a competition. It's a community of 
 
 ## Resources
 
-| Resource | Link |
-|----------|------|
-| Website | [hackclub.com](https://hackclub.com) |
+| Resource  | Link                                                     |
+| --------- | -------------------------------------------------------- |
+| Website   | [hackclub.com](https://hackclub.com)                     |
 | Workshops | [workshops.hackclub.com](https://workshops.hackclub.com) |
-| GitHub | [github.com/hackclub](https://github.com/hackclub) |
-| Slack | [hackclub.com/slack](https://hackclub.com/slack) |
+| GitHub    | [github.com/hackclub](https://github.com/hackclub)       |
+| Slack     | [hackclub.com/slack](https://hackclub.com/slack)         |

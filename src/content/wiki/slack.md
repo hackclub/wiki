@@ -17,15 +17,18 @@ Go to [hackclub.com/slack](https://hackclub.com/slack) and sign up. It's free fo
 ## Essential Channels
 
 ### Get Started
+
 - `#introduce-yourself` — Say hi! Tell us who you are and what you make.
 - `#welcome` — Announcements for new members
 
 ### Core Community
+
 - `#scrapbook` — Share daily updates of what you're working on
 - `#ship` — Show off completed projects
 - `#hack-club-hq` — Updates from Hack Club HQ
 
 ### Help & Learning
+
 - `#code` — General coding questions
 - `#html-css` — Web development help
 - `#python` — Python questions
@@ -33,11 +36,13 @@ Go to [hackclub.com/slack](https://hackclub.com/slack) and sign up. It's free fo
 - `#gamedev` — Game development
 
 ### Projects
+
 - `#sprig` — The Sprig game engine and console
 - `#blot` — The Blot drawing machine
 - `#arcade` — Summer arcade program
 
 ### Fun
+
 - `#lounge` — Off-topic chat
 - `#music` — Share what you're listening to
 - `#memes` — You know

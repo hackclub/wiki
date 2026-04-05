@@ -1,25 +1,30 @@
 ---
-export type NoteType = 'note' | 'warning' | 'tip' | 'danger';
+export type NoteType = "note" | "warning" | "tip" | "danger";
 
 export interface Props {
   type?: NoteType;
   title?: string;
 }
 
-const { type = 'note', title } = Astro.props;
+const { type = "note", title } = Astro.props;
 
-const config: Record<NoteType, { icon: string; label: string; color: string }> = {
-  note:    { icon: 'ℹ️', label: 'Note',    color: 'var(--blue)' },
-  warning: { icon: '⚠️', label: 'Warning', color: 'var(--yellow)' },
-  tip:     { icon: '💡', label: 'Tip',     color: 'var(--green)' },
-  danger:  { icon: '🚨', label: 'Danger',  color: 'var(--red)' },
-};
+const config: Record<NoteType, { icon: string; label: string; color: string }> =
+  {
+    note: { icon: "ℹ️", label: "Note", color: "var(--blue)" },
+    warning: { icon: "⚠️", label: "Warning", color: "var(--yellow)" },
+    tip: { icon: "💡", label: "Tip", color: "var(--green)" },
+    danger: { icon: "🚨", label: "Danger", color: "var(--red)" },
+  };
 
 const { icon, label, color } = config[type];
 const displayTitle = title || label;
 ---
 
-<aside class={`notebox notebox--${type}`} role="note" style={`--note-color: ${color}`}>
+<aside
+  class={`notebox notebox--${type}`}
+  role="note"
+  style={`--note-color: ${color}`}
+>
   <div class="notebox-header">
     <span class="notebox-icon" aria-hidden="true">{icon}</span>
     <span class="notebox-title">{displayTitle}</span>

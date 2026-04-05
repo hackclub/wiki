@@ -14,12 +14,12 @@ Great club meetings have energy, a clear focus, and leave members wanting to com
 
 A typical 90-minute meeting looks like:
 
-| Time | Activity |
-|------|----------|
-| 0–10 min | Arrivals, free hacking, socializing |
-| 10–15 min | Announcements and demos from last week |
-| 15–60 min | Main workshop or project time |
-| 60–80 min | Open hacking / finish up |
+| Time      | Activity                                  |
+| --------- | ----------------------------------------- |
+| 0–10 min  | Arrivals, free hacking, socializing       |
+| 10–15 min | Announcements and demos from last week    |
+| 15–60 min | Main workshop or project time             |
+| 60–80 min | Open hacking / finish up                  |
 | 80–90 min | Share what you made, next meeting preview |
 
 ## The Workshop Model
@@ -37,6 +37,7 @@ Don't try to teach multiple things at once. Better to go deep than wide.
 End every meeting with demos. Even if something isn't finished, showing work-in-progress is encouraged. This builds a culture of sharing and making.
 
 **How to run demos:**
+
 1. Ask "Who wants to show what they made?"
 2. Give each person 2–3 minutes
 3. Celebrate everything, even tiny things
@@ -64,12 +65,12 @@ Keep a list of project ideas ready. Some reliable options:
 ❌ Trying to lecture for the whole meeting  
 ❌ Picking workshops that are too long or complex  
 ❌ Not doing demos at the end  
-❌ Skipping meetings because "nothing is ready"  
+❌ Skipping meetings because "nothing is ready"
 
 ✅ Keep it hands-on  
 ✅ Pick achievable workshops  
 ✅ Always demo, always share  
-✅ Show up consistently  
+✅ Show up consistently
 
 ## Resources
 

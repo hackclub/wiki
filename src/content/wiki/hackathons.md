@@ -34,17 +34,18 @@ Any Hack Club can run their own hackathon! Hack Club HQ provides:
 
 ### Planning Timeline
 
-| Weeks Before | Tasks |
-|-------------|-------|
-| 12+ | Pick date, secure venue, form organizing team |
-| 8–10 | Open registration, start sponsor outreach |
-| 4–6 | Confirm sponsors, finalize schedule |
-| 1–2 | Send final details to attendees |
-| Day of | Have fun! |
+| Weeks Before | Tasks                                         |
+| ------------ | --------------------------------------------- |
+| 12+          | Pick date, secure venue, form organizing team |
+| 8–10         | Open registration, start sponsor outreach     |
+| 4–6          | Confirm sponsors, finalize schedule           |
+| 1–2          | Send final details to attendees               |
+| Day of       | Have fun!                                     |
 
 ### Essentials
 
 Every hackathon needs:
+
 - **Venue** — school gym, community center, or office space
 - **Food** — meals and snacks for all attendees
 - **WiFi** — fast, reliable, with good passwords

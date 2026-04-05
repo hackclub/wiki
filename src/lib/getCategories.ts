@@ -1,8 +1,8 @@
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 
-export type CategoryMap = Record<string, CollectionEntry<'wiki'>[]>;
+export type CategoryMap = Record<string, CollectionEntry<"wiki">[]>;
 
-export function getCategories(pages: CollectionEntry<'wiki'>[]): CategoryMap {
+export function getCategories(pages: CollectionEntry<"wiki">[]): CategoryMap {
   const map: CategoryMap = {};
 
   for (const page of pages) {
@@ -15,7 +15,7 @@ export function getCategories(pages: CollectionEntry<'wiki'>[]): CategoryMap {
   // Sort pages within each category alphabetically
   for (const cat in map) {
     map[cat].sort((a, b) =>
-      a.data.title.localeCompare(b.data.title, 'en', { sensitivity: 'base' })
+      a.data.title.localeCompare(b.data.title, "en", { sensitivity: "base" }),
     );
   }
 
@@ -23,14 +23,14 @@ export function getCategories(pages: CollectionEntry<'wiki'>[]): CategoryMap {
 }
 
 export function categorySlug(name: string): string {
-  return name.toLowerCase().replace(/\s+/g, '-');
+  return name.toLowerCase().replace(/\s+/g, "-");
 }
 
 export function categoryFromSlug(
   slug: string,
-  categories: CategoryMap
+  categories: CategoryMap,
 ): string | undefined {
   return Object.keys(categories).find(
-    (k) => k.toLowerCase().replace(/\s+/g, '-') === slug
+    (k) => k.toLowerCase().replace(/\s+/g, "-") === slug,
   );
 }

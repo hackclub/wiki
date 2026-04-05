@@ -6,9 +6,16 @@ export interface Props {
   noindex?: boolean;
 }
 
-const { title, description = 'The community-maintained Hack Club knowledge base.', image, noindex } = Astro.props;
+const {
+  title,
+  description = "The community-maintained Hack Club knowledge base.",
+  image,
+  noindex,
+} = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = image ? new URL(image, Astro.site) : new URL('/og-default.png', Astro.site);
+const ogImage = image
+  ? new URL(image, Astro.site)
+  : new URL("/og-default.png", Astro.site);
 ---
 
 <!doctype html>
@@ -17,14 +24,18 @@ const ogImage = image ? new URL(image, Astro.site) : new URL('/og-default.png', 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script is:inline>
-      (function() {
-        const stored = localStorage.getItem('hc-wiki-theme');
-        const theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
+      (function () {
+        const stored = localStorage.getItem("hc-wiki-theme");
+        const theme =
+          stored ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+        document.documentElement.setAttribute("data-theme", theme);
         document.documentElement.style.colorScheme = theme;
       })();
     </script>
-    <link rel="stylesheet" href="https://fonts.hackclub.com">
+    <link rel="stylesheet" href="https://fonts.hackclub.com" />
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
 
@@ -44,7 +55,6 @@ const ogImage = image ? new URL(image, Astro.site) : new URL('/og-default.png', 
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-
     <title>{title} — Hack Club Wiki</title>
   </head>
   <body>
@@ -53,7 +63,7 @@ const ogImage = image ? new URL(image, Astro.site) : new URL('/og-default.png', 
 </html>
 
 <style is:global>
-  @import '../styles/global.css';
-  @import '../styles/wiki.css';
-  @import '../styles/syntax.css';
+  @import "../styles/global.css";
+  @import "../styles/wiki.css";
+  @import "../styles/syntax.css";
 </style>
