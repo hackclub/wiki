@@ -4,7 +4,8 @@
    ============================================= */
 
 /* Phantom Sans — self-hosted or CDN */
-@import url("https://fonts.hackclub.com");
+/* NOTE: loading this makes the content of the page blink */
+/* @import url("https://fonts.hackclub.com"); */
 
 /* ---- Design Tokens ---- */
 :root,
@@ -107,7 +108,9 @@ body {
   color: var(--text);
   line-height: 1.65;
   min-height: 100vh;
-  transition: background var(--transition-slow), color var(--transition-slow);
+  transition:
+    background var(--transition-slow),
+    color var(--transition-slow);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

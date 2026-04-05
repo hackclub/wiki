@@ -12,10 +12,19 @@ const ogImage = image ? new URL(image, Astro.site) : new URL('/og-default.png', 
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      (function() {
+        const stored = localStorage.getItem('hc-wiki-theme');
+        const theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
+    <link rel="stylesheet" href="https://fonts.hackclub.com">
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
 
@@ -35,17 +44,6 @@ const ogImage = image ? new URL(image, Astro.site) : new URL('/og-default.png', 
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Prevent theme flash — must run synchronously before paint -->
-    <script is:inline>
-      (function () {
-        const stored = localStorage.getItem('hc-wiki-theme');
-        if (stored === 'light') {
-          document.documentElement.setAttribute('data-theme', 'light');
-        } else {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        }
-      })();
-    </script>
 
     <title>{title} — Hack Club Wiki</title>
   </head>

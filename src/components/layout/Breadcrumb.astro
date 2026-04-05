@@ -10,8 +10,7 @@ const { crumbs } = Astro.props;
   <ol class="breadcrumb-list" role="list">
     <li>
       <a href="/" class="breadcrumb-link">Wiki</a>
-    </li>
-    {crumbs.map((crumb, i) => (
+    </li>    {crumbs.map((crumb, i) => (
       <li class="breadcrumb-item">
         <span class="breadcrumb-sep" aria-hidden="true">›</span>
         {crumb.href && i < crumbs.length - 1 ? (
