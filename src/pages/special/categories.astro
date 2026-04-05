@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WikiLayout from '../../components/layout/WikiLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import { getCategories, categorySlug } from '../../lib/getCategories';
+
+const pages = await getCollection('wiki');
+const categories = getCategories(pages);
+const sortedCats = Object.keys(categories).sort((a, b) => a.localeCompare(b));
+---
+
+<Base title="Categories" description="All categories in the Hack Club Wiki.">
+  <WikiLayout showToc={false}>
+    <Breadcrumb crumbs={[{ label: 'Categories' }]} />
+
+    <header class="special-header">
+      <h1>Categories</h1>
+      <p class="special-desc">{sortedCats.length} categories across {pages.length} articles.</p>
+    </header>
+
+    <div class="cat-grid">
+      {sortedCats.map((cat) => {
+        const catPages = categories[cat];
+        return (
+          <a href={`/category/${categorySlug(cat)}`} class="cat-card">
+            <div class="cat-card-name">{cat}</div>
+            <div class="cat-card-count">{catPages.length} {catPages.length === 1 ? 'article' : 'articles'}</div>
+            <ul class="cat-card-pages" aria-label={`Pages in ${cat}`}>
+              {catPages.slice(0, 4).map((p) => (
+                <li>{p.data.title}</li>
+              ))}
+              {catPages.length > 4 && (
+                <li class="cat-card-more">+{catPages.length - 4} more</li>
+              )}
+            </ul>
+          </a>
+        );
+      })}
+    </div>
+  </WikiLayout>
+</Base>
+
+<style>
+  .special-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .special-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.375rem;
+  }
+
+  .special-desc {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .cat-card {
+    display: block;
+    background: var(--elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s ease, transform 0.1s ease;
+  }
+
+  .cat-card:hover {
+    border-color: var(--red);
+    transform: translateY(-2px);
+  }
+
+  .cat-card-name {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+    transition: color 0.15s ease;
+  }
+
+  .cat-card:hover .cat-card-name {
+    color: var(--red);
+  }
+
+  .cat-card-count {
+    font-size: 0.8125rem;
+    color: var(--red);
+    font-weight: 600;
+    margin-bottom: 0.875rem;
+  }
+
+  .cat-card-pages {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .cat-card-pages li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cat-card-more {
+    color: var(--blue);
+    font-style: italic;
+  }
+</style>

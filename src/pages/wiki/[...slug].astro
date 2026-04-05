@@ -1,0 +1,57 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WikiLayout from '../../components/layout/WikiLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import ArticleHeader from '../../components/article/ArticleHeader.astro';
+import ArticleFooter from '../../components/article/ArticleFooter.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('wiki');
+  return pages.map((page) => ({
+    params: { slug: page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content, headings } = await render(page);
+
+const breadcrumbs = [
+  ...(page.data.categories[0]
+    ? [{ label: page.data.categories[0], href: `/category/${page.data.categories[0].toLowerCase().replace(/\s+/g, '-')}` }]
+    : []),
+  { label: page.data.title },
+];
+---
+
+<Base
+  title={page.data.title}
+  description={page.data.description}
+  image={page.data.image}
+>
+  <WikiLayout headings={headings}>
+    <Breadcrumb crumbs={breadcrumbs} />
+    <ArticleHeader
+      title={page.data.title}
+      description={page.data.description}
+      categories={page.data.categories}
+      stub={page.data.stub}
+      lastEdited={page.data.lastEdited}
+    />
+
+    <article
+      class="wiki-prose"
+      data-pagefind-body
+      data-pagefind-meta={`title:${page.data.title},description:${page.data.description}`}
+      data-pagefind-filter={page.data.categories.map(c => `category:${c}`).join(',')}
+    >
+      <Content />
+    </article>
+
+    <ArticleFooter
+      slug={page.id}
+      related={page.data.related}
+    />
+  </WikiLayout>
+</Base>

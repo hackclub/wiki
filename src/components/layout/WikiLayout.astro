@@ -1,0 +1,261 @@
+---
+import Sidebar from './Sidebar.astro';
+import TableOfContents from './TableOfContents.astro';
+import Footer from './Footer.astro';
+
+export interface Props {
+  headings?: { depth: number; slug: string; text: string }[];
+  showToc?: boolean;
+}
+
+const { headings = [], showToc = true } = Astro.props;
+const isWide = !showToc;
+---
+
+<div class="wiki-shell">
+  <!-- Mobile overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+  <!-- Sidebar -->
+  <aside class="wiki-sidebar" id="wiki-sidebar" aria-label="Site navigation">
+    <Sidebar />
+  </aside>
+
+  <!-- Main area -->
+  <div class="wiki-main">
+    <!-- Mobile header bar -->
+    <div class="mobile-header">
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle sidebar" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a href="/" class="mobile-logo">
+        <svg width="22" height="22" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="100" height="100" rx="20" fill="#ec3750"/>
+          <rect x="34" y="21" width="5" height="62" rx="2.5" fill="white" opacity="0.95"/>
+          <path d="M39 23 L79 37 L39 52 Z" fill="white"/>
+          <ellipse cx="36.5" cy="85" rx="15" ry="5" fill="white" opacity="0.2"/>
+        </svg>
+        <span>Hack Club Wiki</span>
+      </a>
+    </div>
+
+    <!-- Content + TOC row -->
+    <div class="wiki-content-row">
+      <main class:list={['wiki-article', { 'wiki-article--wide': isWide }]} id="main-content">
+        <slot />
+      </main>
+
+      {showToc && headings.length > 1 && (
+        <aside class="wiki-toc" aria-label="Table of contents">
+          <TableOfContents headings={headings} />
+        </aside>
+      )}
+    </div>
+
+    <Footer />
+  </div>
+</div>
+
+<style>
+  /* ---- Shell layout ---- */
+  .wiki-shell {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ---- Sidebar ---- */
+  .wiki-sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 50;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ---- Main ---- */
+  .wiki-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .wiki-content-row {
+    display: flex;
+    flex: 1;
+    gap: 0;
+  }
+
+  .wiki-article {
+    flex: 1;
+    min-width: 0;
+    padding: 2rem 2.5rem 4rem;
+    max-width: calc(var(--content-max) + 5rem);
+  }
+
+  /* No TOC — let the content fill all available space */
+  .wiki-article--wide {
+    max-width: none;
+  }
+
+  /* ---- TOC rail ---- */
+  .wiki-toc {
+    width: var(--toc-width);
+    flex-shrink: 0;
+    padding: 2rem 1rem 2rem 0;
+  }
+
+  /* ---- Mobile header ---- */
+  .mobile-header {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--sheet);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  .mobile-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text);
+    border-radius: 1px;
+    transition: all 0.2s ease;
+    transform-origin: center;
+  }
+
+  .hamburger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .hamburger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* ---- Overlay ---- */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 45;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  /* ---- Tablet: hide TOC ---- */
+  @media (max-width: 64em) {
+    .wiki-toc {
+      display: none;
+    }
+
+    .wiki-article {
+      padding: 1.5rem 1.75rem 3rem;
+    }
+
+    .wiki-article--wide {
+      max-width: none;
+    }
+  }
+
+  /* ---- Mobile: off-canvas sidebar ---- */
+  @media (max-width: 48em) {
+    .wiki-sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100%;
+      transform: translateX(-100%);
+      box-shadow: 4px 0 20px var(--shadow);
+    }
+
+    .wiki-sidebar.open {
+      transform: translateX(0);
+    }
+
+    .sidebar-overlay {
+      display: block;
+    }
+
+    .sidebar-overlay.open {
+      opacity: 1;
+    }
+
+    .mobile-header {
+      display: flex;
+    }
+
+    .wiki-article {
+      padding: 1.25rem 1rem 3rem;
+    }
+  }
+</style>
+
+<script>
+  const hamburger = document.getElementById('hamburger-btn');
+  const sidebar = document.getElementById('wiki-sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+
+  function openSidebar() {
+    sidebar?.classList.add('open');
+    overlay?.classList.add('open');
+    hamburger?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar?.classList.remove('open');
+    overlay?.classList.remove('open');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = sidebar?.classList.contains('open');
+    isOpen ? closeSidebar() : openSidebar();
+  });
+
+  overlay?.addEventListener('click', closeSidebar);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSidebar();
+  });
+</script>

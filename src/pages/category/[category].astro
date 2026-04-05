@@ -1,0 +1,138 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WikiLayout from '../../components/layout/WikiLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import { getCategories, categoryFromSlug } from '../../lib/getCategories';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('wiki');
+  const categories = getCategories(pages);
+
+  return Object.keys(categories).map((cat) => ({
+    params: { category: cat.toLowerCase().replace(/\s+/g, '-') },
+    props: { pages: categories[cat], categoryName: cat },
+  }));
+}
+
+const { pages, categoryName } = Astro.props;
+---
+
+<Base
+  title={`${categoryName} — Category`}
+  description={`All wiki articles in the ${categoryName} category.`}
+>
+  <WikiLayout showToc={false}>
+    <Breadcrumb crumbs={[{ label: 'Categories', href: '/special/categories' }, { label: categoryName }]} />
+
+    <header class="cat-header">
+      <p class="cat-eyebrow">Category</p>
+      <h1 class="cat-title">{categoryName}</h1>
+      <p class="cat-count">{pages.length} {pages.length === 1 ? 'article' : 'articles'}</p>
+    </header>
+
+    <ul class="page-list" role="list">
+      {pages.map((page) => (
+        <li class="page-list-item">
+          <a href={`/wiki/${page.id}`} class="page-list-link">
+            <div class="page-list-info">
+              <span class="page-list-title">{page.data.title}</span>
+              {page.data.stub && <span class="stub-badge">stub</span>}
+            </div>
+            <p class="page-list-desc">{page.data.description}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </WikiLayout>
+</Base>
+
+<style>
+  .cat-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cat-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--red);
+    margin-bottom: 0.5rem;
+  }
+
+  .cat-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .cat-count {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .page-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .page-list-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+  }
+
+  .page-list-item:hover {
+    border-color: var(--red);
+  }
+
+  .page-list-link {
+    display: block;
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .page-list-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .page-list-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+    transition: color 0.15s ease;
+  }
+
+  .page-list-item:hover .page-list-title {
+    color: var(--red);
+  }
+
+  .stub-badge {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: color-mix(in srgb, var(--yellow) 15%, var(--elevated));
+    color: var(--yellow);
+    border: 1px solid color-mix(in srgb, var(--yellow) 30%, var(--border));
+    border-radius: 999px;
+    padding: 0.1rem 0.5rem;
+  }
+
+  .page-list-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+</style>

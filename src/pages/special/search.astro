@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import WikiLayout from '../../components/layout/WikiLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import SearchBar from '../../components/search/SearchBar.astro';
+---
+
+<Base title="Search" description="Search all Hack Club Wiki articles.">
+  <WikiLayout showToc={false}>
+    <Breadcrumb crumbs={[{ label: 'Search' }]} />
+
+    <header class="special-header">
+      <h1>Search</h1>
+      <p class="special-desc">Full-text search across all wiki articles.</p>
+    </header>
+
+    <SearchBar />
+  </WikiLayout>
+</Base>
+
+<style>
+  .special-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .special-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.375rem;
+  }
+
+  .special-desc {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+</style>

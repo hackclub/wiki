@@ -1,0 +1,67 @@
+---
+export type NoteType = 'note' | 'warning' | 'tip' | 'danger';
+
+export interface Props {
+  type?: NoteType;
+  title?: string;
+}
+
+const { type = 'note', title } = Astro.props;
+
+const config: Record<NoteType, { icon: string; label: string; color: string }> = {
+  note:    { icon: 'ℹ️', label: 'Note',    color: 'var(--blue)' },
+  warning: { icon: '⚠️', label: 'Warning', color: 'var(--yellow)' },
+  tip:     { icon: '💡', label: 'Tip',     color: 'var(--green)' },
+  danger:  { icon: '🚨', label: 'Danger',  color: 'var(--red)' },
+};
+
+const { icon, label, color } = config[type];
+const displayTitle = title || label;
+---
+
+<aside class={`notebox notebox--${type}`} role="note" style={`--note-color: ${color}`}>
+  <div class="notebox-header">
+    <span class="notebox-icon" aria-hidden="true">{icon}</span>
+    <span class="notebox-title">{displayTitle}</span>
+  </div>
+  <div class="notebox-body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .notebox {
+    border-left: 4px solid var(--note-color);
+    background: color-mix(in srgb, var(--note-color) 8%, var(--elevated));
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 0.875rem 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .notebox-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .notebox-icon {
+    font-size: 1rem;
+  }
+
+  .notebox-title {
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: var(--note-color);
+  }
+
+  .notebox-body {
+    font-size: 0.9375rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .notebox-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+</style>

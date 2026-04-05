@@ -1,0 +1,57 @@
+/* =============================================
+   Hack Club Wiki — Code Syntax Highlighting
+   Custom dark/light token colors
+   ============================================= */
+
+/* Astro uses Shiki for syntax highlighting */
+/* These styles complement the built-in Shiki output */
+
+.astro-code,
+code[data-theme],
+pre[data-theme] {
+  background: var(--sunken) !important;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+/* Token overrides for Hack Club palette */
+[data-theme="light"] .astro-code,
+[data-theme="light"] code[data-theme],
+[data-theme="light"] pre[data-theme] {
+  background: #f6f8fa !important;
+}
+
+/* Copy button for code blocks */
+.code-block-wrapper {
+  position: relative;
+}
+
+.code-copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  transition: all 0.15s ease;
+  opacity: 0;
+}
+
+.code-block-wrapper:hover .code-copy-btn {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+.code-copy-btn.copied {
+  color: var(--green);
+  border-color: var(--green);
+}

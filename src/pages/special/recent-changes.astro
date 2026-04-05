@@ -1,0 +1,189 @@
+---
+import Base from '../../layouts/Base.astro';
+import WikiLayout from '../../components/layout/WikiLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import { getRecentChanges } from '../../lib/getRecentChanges';
+
+const changes = getRecentChanges(50);
+---
+
+<Base title="Recent Changes" description="Recent edits to the Hack Club Wiki, sourced from git history.">
+  <WikiLayout showToc={false}>
+    <Breadcrumb crumbs={[{ label: 'Recent Changes' }]} />
+
+    <header class="special-header">
+      <h1>Recent Changes</h1>
+      <p class="special-desc">The last {changes.length} commits touching wiki articles.</p>
+    </header>
+
+    {changes.length === 0 ? (
+      <div class="empty-state">
+        <p>No git history available. Recent changes are populated at build time from <code>git log</code>.</p>
+      </div>
+    ) : (
+      <ul class="changes-list" role="list">
+        {changes.map((change) => (
+          <li class="change-item">
+            <div class="change-meta">
+              <span class="change-author">{change.author}</span>
+              <span class="change-sep" aria-hidden="true">·</span>
+              <time class="change-time" datetime={change.date} title={change.date}>
+                {change.relativeDate}
+              </time>
+              <a
+                href={`https://github.com/hackclub/wiki/commit/${change.hash}`}
+                class="change-hash"
+                target="_blank"
+                rel="noopener"
+                aria-label={`View commit ${change.hash.slice(0, 7)}`}
+              >
+                {change.hash.slice(0, 7)}
+              </a>
+            </div>
+            <p class="change-message">{change.message}</p>
+            {change.files.length > 0 && (
+              <ul class="change-files" aria-label="Changed files">
+                {change.files.map((file) => (
+                  <li>
+                    <a href={`/wiki/${file}`} class="change-file-link">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                      </svg>
+                      {file}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    )}
+  </WikiLayout>
+</Base>
+
+<style>
+  .special-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .special-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.375rem;
+  }
+
+  .special-desc {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .empty-state {
+    background: var(--elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .empty-state code {
+    font-family: var(--font-mono);
+    background: var(--sunken);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.1em 0.4em;
+    color: var(--red);
+    font-size: 0.875em;
+  }
+
+  .changes-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .change-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .change-item:last-child {
+    border-bottom: none;
+  }
+
+  .change-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.375rem;
+    font-size: 0.8125rem;
+    flex-wrap: wrap;
+  }
+
+  .change-author {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .change-sep {
+    color: var(--border);
+  }
+
+  .change-time {
+    color: var(--muted);
+  }
+
+  .change-hash {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: var(--elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.05rem 0.4rem;
+    text-decoration: none;
+    margin-left: auto;
+  }
+
+  .change-hash:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+  }
+
+  .change-message {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .change-files {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .change-file-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8125rem;
+    color: var(--blue);
+    text-decoration: none;
+    background: var(--elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.15rem 0.5rem;
+    transition: border-color 0.15s ease;
+  }
+
+  .change-file-link:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+</style>

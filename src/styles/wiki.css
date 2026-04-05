@@ -1,0 +1,203 @@
+/* =============================================
+   Hack Club Wiki — Prose Typography
+   Styles for .wiki-prose article content
+   ============================================= */
+
+.wiki-prose {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text);
+  max-width: var(--content-max);
+}
+
+/* ---- Headings ---- */
+.wiki-prose h1,
+.wiki-prose h2,
+.wiki-prose h3,
+.wiki-prose h4,
+.wiki-prose h5 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--heading);
+  line-height: 1.25;
+  scroll-margin-top: 5rem;
+}
+
+.wiki-prose h1 { font-size: 2rem; margin: 0 0 1.25rem; }
+.wiki-prose h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+.wiki-prose h3 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+.wiki-prose h4 { font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+
+/* ---- Paragraphs ---- */
+.wiki-prose p {
+  margin: 0 0 1.25rem;
+}
+
+/* ---- Links ---- */
+.wiki-prose a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wiki-prose a:hover {
+  color: var(--link-hover);
+}
+
+/* ---- WikiLinks ---- */
+.wiki-prose .wiki-link {
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.wiki-prose .wiki-link--new {
+  color: var(--muted);
+  text-decoration-style: dashed;
+}
+
+/* ---- Lists ---- */
+.wiki-prose ul,
+.wiki-prose ol {
+  margin: 0 0 1.25rem 1.5rem;
+}
+
+.wiki-prose li {
+  margin-bottom: 0.3rem;
+}
+
+.wiki-prose li > ul,
+.wiki-prose li > ol {
+  margin-top: 0.3rem;
+  margin-bottom: 0;
+}
+
+/* ---- Blockquotes ---- */
+.wiki-prose blockquote {
+  border-left: 4px solid var(--blockquote-border);
+  padding: 0.75rem 1.25rem;
+  margin: 1.5rem 0;
+  background: var(--elevated);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.wiki-prose blockquote p {
+  margin: 0;
+}
+
+/* ---- Inline Code ---- */
+.wiki-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.4em;
+  color: var(--red);
+}
+
+/* ---- Code blocks ---- */
+.wiki-prose pre {
+  background: var(--sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.wiki-prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text);
+  font-size: inherit;
+}
+
+/* ---- Tables ---- */
+.wiki-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9375rem;
+}
+
+.wiki-prose thead {
+  background: var(--elevated);
+}
+
+.wiki-prose th {
+  text-align: left;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+  color: var(--text);
+}
+
+.wiki-prose td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.wiki-prose tr:hover td {
+  background: var(--elevated);
+}
+
+/* ---- Images ---- */
+.wiki-prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  margin: 1rem 0;
+}
+
+/* ---- Horizontal rule ---- */
+.wiki-prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ---- Strong / Em ---- */
+.wiki-prose strong {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.wiki-prose em {
+  font-style: italic;
+}
+
+/* ---- Stub badge ---- */
+.stub-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: color-mix(in srgb, var(--yellow) 10%, var(--elevated));
+  border: 1px solid color-mix(in srgb, var(--yellow) 40%, var(--border));
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin: 0 0 2rem;
+  font-size: 0.9375rem;
+}
+
+.stub-notice-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.stub-notice-text {
+  color: var(--text);
+}
+
+.stub-notice-text strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}

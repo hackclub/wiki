@@ -1,0 +1,99 @@
+---
+export interface Props {
+  title?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const { title, image, imageAlt = '' } = Astro.props;
+---
+
+<aside class="infobox" aria-label={title || 'Info'}>
+  {title && <div class="infobox-title">{title}</div>}
+  {image && (
+    <div class="infobox-image">
+      <img src={image} alt={imageAlt} loading="lazy" />
+    </div>
+  )}
+  <div class="infobox-body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .infobox {
+    float: right;
+    clear: right;
+    width: 280px;
+    margin: 0 0 1.5rem 2rem;
+    background: var(--elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    font-size: 0.875rem;
+  }
+
+  .infobox-title {
+    background: var(--red);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.875rem;
+    text-align: center;
+  }
+
+  .infobox-image {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .infobox-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0;
+    border: none;
+    margin: 0;
+  }
+
+  .infobox-body {
+    padding: 0.75rem 0.875rem;
+  }
+
+  /* Table inside infobox */
+  .infobox-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+  }
+
+  .infobox-body :global(tr) {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .infobox-body :global(tr:last-child) {
+    border-bottom: none;
+  }
+
+  .infobox-body :global(th) {
+    text-align: left;
+    font-weight: 600;
+    color: var(--muted);
+    padding: 0.35rem 0;
+    vertical-align: top;
+    width: 40%;
+  }
+
+  .infobox-body :global(td) {
+    padding: 0.35rem 0 0.35rem 0.5rem;
+    vertical-align: top;
+    border: none;
+  }
+
+  @media (max-width: 48em) {
+    .infobox {
+      float: none;
+      width: 100%;
+      margin: 0 0 1.5rem;
+    }
+  }
+</style>

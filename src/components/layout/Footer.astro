@@ -1,0 +1,70 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="wiki-footer">
+  <div class="wiki-footer-inner">
+    <span class="footer-copy">
+      © {year} <a href="https://hackclub.com" target="_blank" rel="noopener">Hack Club</a>. Content available under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
+    </span>
+    <nav class="footer-links" aria-label="Footer links">
+      <a href="/special/all-pages">All Pages</a>
+      <a href="/special/categories">Categories</a>
+      <a href="/special/recent-changes">Recent Changes</a>
+      <a href="https://github.com/hackclub/wiki" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .wiki-footer {
+    border-top: 1px solid var(--border);
+    padding: 1.25rem 2.5rem;
+    background: var(--sheet);
+  }
+
+  .wiki-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .footer-copy a {
+    color: var(--muted);
+  }
+
+  .footer-copy a:hover {
+    color: var(--red);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--red);
+  }
+
+  @media (max-width: 48em) {
+    .wiki-footer {
+      padding: 1rem;
+    }
+
+    .wiki-footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

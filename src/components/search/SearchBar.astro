@@ -1,0 +1,87 @@
+---
+// Pagefind search UI wrapper
+// Only renders on the client; Pagefind bundle is in /pagefind/ after build.
+---
+
+<div id="search-container" class="search-container">
+  <div id="pagefind-search"></div>
+</div>
+
+<!-- Pagefind CSS overrides -->
+<style>
+  .search-container {
+    width: 100%;
+  }
+
+  /* Map Pagefind variables to Hack Club tokens */
+  #pagefind-search {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: var(--red);
+    --pagefind-ui-text: var(--text);
+    --pagefind-ui-background: var(--elevated);
+    --pagefind-ui-border: var(--border);
+    --pagefind-ui-tag: var(--elevated);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: "Phantom Sans", system-ui, sans-serif;
+  }
+
+  /* Override inner Pagefind styles */
+  :global(.pagefind-ui__search-input) {
+    background: var(--sunken) !important;
+    font-family: var(--font-body) !important;
+  }
+
+  :global(.pagefind-ui__result) {
+    border-color: var(--border) !important;
+  }
+
+  :global(.pagefind-ui__result:hover) {
+    background: var(--elevated) !important;
+  }
+
+  :global(.pagefind-ui__result-link) {
+    color: var(--text) !important;
+    font-weight: 600 !important;
+  }
+
+  :global(.pagefind-ui__result-excerpt) {
+    color: var(--muted) !important;
+  }
+
+  :global(mark) {
+    background: color-mix(in srgb, var(--red) 20%, transparent) !important;
+    color: var(--red) !important;
+    border-radius: 2px;
+  }
+</style>
+
+<script>
+  // Load Pagefind UI asynchronously (only exists post-build)
+  async function initSearch() {
+    try {
+      // @ts-ignore — Pagefind is injected at build time
+      // eslint-disable-next-line
+      const { PagefindUI } = await import(/* @vite-ignore */ '/pagefind/pagefind-ui.js');
+      new PagefindUI({
+        element: '#pagefind-search',
+        showSubResults: true,
+        showImages: false,
+        resetStyles: false,
+      });
+    } catch {
+      const el = document.getElementById('pagefind-search');
+      if (el) {
+        el.innerHTML = `
+          <p style="color:var(--muted);font-size:0.9rem;padding:1rem 0">
+            Search is available after running <code>npm run build</code>.<br/>
+            In dev mode, browse articles via the sidebar.
+          </p>`;
+      }
+    }
+  }
+
+  initSearch();
+</script>
