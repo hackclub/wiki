@@ -3,6 +3,7 @@ title: Style Guide
 description: How to write and format Hack Club Wiki articles consistently.
 categories: ["Meta"]
 tags: ["meta", "contributing", "style"]
+banner: https://hackclub.com/stickers/hack-club-anime.png 
 ---
 
 # Wiki Style Guide

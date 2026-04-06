@@ -4,6 +4,7 @@ description: Sprig is Hack Club's handheld game console — write a game in the 
 categories: ["Projects", "Hardware"]
 tags: ["sprig", "games", "hardware", "ysws"]
 related: ["hackathons", "blot"]
+banner: https://hackclub.com/stickers/hack-club-anime.png 
 ---
 
 # Sprig

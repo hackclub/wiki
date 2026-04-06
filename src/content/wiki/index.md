@@ -4,6 +4,7 @@ description: The community-maintained knowledge base for Hack Club — clubs, ev
 categories: ["Meta"]
 tags: ["welcome", "about"]
 featured: true
+banner: https://hackclub.com/stickers/hack-club-anime.png 
 ---
 
 # Welcome to the Hack Club Wiki

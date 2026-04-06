@@ -5,6 +5,7 @@ categories: ["Clubs", "Getting Started"]
 tags: ["club", "leadership", "beginners"]
 featured: true
 related: ["running-a-meeting", "getting-started"]
+banner: https://hackclub.com/stickers/hack-club-anime.png 
 ---
 
 # Starting a Hack Club
