@@ -3,6 +3,7 @@ export interface Props {
   title: string;
   description: string;
   categories: string[];
+  banner?: string;
   stub?: boolean;
   lastEdited?: Date;
   author?: string;
@@ -12,6 +13,7 @@ const {
   title,
   description,
   categories,
+  banner,
   stub = false,
   lastEdited,
 } = Astro.props;
@@ -25,6 +27,11 @@ const formatDate = (d: Date) =>
 ---
 
 <header class="article-header">
+  {
+    banner && (
+      <img src={banner} alt={`Banner for ${title}`} class="article-banner" />
+    )
+  }
   {
     stub && (
       <div class="stub-notice">
@@ -102,6 +109,15 @@ const formatDate = (d: Date) =>
     margin-bottom: 2.25rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border);
+  }
+
+  .article-banner {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
   }
 
   .stub-notice {

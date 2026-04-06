@@ -33,7 +33,7 @@ const breadcrumbs = [
 <Base
   title={page.data.title}
   description={page.data.description}
-  image={page.data.image}
+  banner={page.data.banner}
 >
   <WikiLayout headings={headings}>
     <Breadcrumb crumbs={breadcrumbs} />
@@ -41,6 +41,7 @@ const breadcrumbs = [
       title={page.data.title}
       description={page.data.description}
       categories={page.data.categories}
+      banner={page.data.banner}
       stub={page.data.stub}
       lastEdited={page.data.lastEdited}
     />
