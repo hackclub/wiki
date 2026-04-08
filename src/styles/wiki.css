@@ -6,6 +6,8 @@
 .wiki-prose {
   font-family: var(--font-body);
   font-size: 1rem;
+  margin-left: 1.75em;
+  margin-right: 1.75em;
   line-height: 1.75;
   color: var(--text);
   max-width: var(--content-max);
@@ -214,4 +216,54 @@
 .stub-notice-text strong {
   display: block;
   margin-bottom: 0.25rem;
+}
+
+@media (max-width: 640px) {
+  .wiki-prose {
+    font-size: 0.9rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    line-height: 1.65;
+  }
+
+  .wiki-prose h1 {
+    font-size: 1.6rem;
+  }
+
+  .wiki-prose h2 {
+    font-size: 1.3rem;
+    margin: 2rem 0 0.75rem;
+  }
+
+  .wiki-prose h3 {
+    font-size: 1.1rem;
+    margin: 1.5rem 0 0.6rem;
+  }
+
+  .wiki-prose h4 {
+    font-size: 0.95rem;
+  }
+
+  .wiki-prose p {
+    margin-bottom: 1rem;
+  }
+
+  .wiki-prose ul,
+  .wiki-prose ol {
+    margin-left: 1.25rem;
+  }
+
+  .wiki-prose pre {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .wiki-prose table {
+    font-size: 0.85rem;
+  }
+
+  .stub-notice {
+    padding: 0.85rem 1rem;
+    font-size: 0.85rem;
+  }
 }
