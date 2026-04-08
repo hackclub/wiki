@@ -10,29 +10,20 @@ banner: https://hackclub.com/stickers/hack-club-anime.png
 
 # Starting a Hack Club
 
-Starting a Hack Club is free, and Hack Club HQ will support you every step of the way. Here's how to do it.
+Starting a Hack Club is free, and Hack Club will support you every step of the way. Here's how to do it:
 
 ## Requirements
 
-- You must be a **high school student** (or younger)
-- You need a **faculty advisor** (a teacher or staff member)
-- Your school should allow student clubs
+- You must be a **high school student** (13 to 18 years old!)
+- That's it! Really, all you need is the willingness and enthusiasm to lead a club.
 
 ## Step 1: Register
 
-Go to [hackclub.com/clubs](https://hackclub.com/clubs) and fill out the application. You'll need:
-
-- Your name and email
-- Your school name and location
-- A brief description of your plans
+Go to [hackclub.com/clubs](https://hackclub.com/clubs) and fill out the application, it's that easy!
 
 ## Step 2: Get Approved
 
-Hack Club HQ will review your application. Most are approved within a week. You'll get:
-
-- Access to the **club leaders Slack channel**
-- A **club starter kit** with stickers and resources
-- A **$50 grant** for your first meeting
+The club operations team will review your application. Most are approved within 24 hours (Mon-Fri). You'll then have a 30 minute chat with a team member to get to know you!
 
 ## Step 3: Find Members
 
@@ -44,19 +35,19 @@ Hack Club HQ will review your application. Most are approved within a week. You'
 
 See [[Running a Meeting]] for tips. For your first meeting:
 
-1. Introduce Hack Club (use the slides from the starter kit)
+1. Introduce Hack Club (use slides from dozens of slideshows made by other hackclubbers!)
 2. Show a demo of something cool you built
 3. Have everyone do a quick [[workshops|workshop]] together
 4. Collect contact info for follow-up
 
-## Resources from HQ
+## Resources from Hack Club
 
-Hack Club HQ provides:
+Hack Club provides:
 
-- Printed stickers and swag
-- Slack support from experienced leaders
+- Printed
+- A slack channel for club leaders where you can get advice, ask for help, and tell us about your club!
 - Access to all [[Programs|HQ programs]]
-- Monthly grants for active clubs
+- And much more...
 
 ## Tips from Experienced Leaders
 
