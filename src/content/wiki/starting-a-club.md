@@ -44,7 +44,7 @@ See [[Running a Meeting]] for tips. For your first meeting:
 
 Hack Club provides:
 
-- Printed
+- Free Stickers & Posters!
 - A slack channel for club leaders where you can get advice, ask for help, and tell us about your club!
 - Access to all [[Programs|HQ programs]]
 - And much more...
