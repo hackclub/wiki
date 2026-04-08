@@ -19,7 +19,7 @@ Starting a Hack Club is free, and Hack Club will support you every step of the w
 
 ## Step 1: Register
 
-Go to [hackclub.com/clubs](https://hackclub.com/clubs) and fill out the application, it's that easy!
+Go to [apply.hackclub.com](https://apply.hackclub.com/) and fill out the application, it's that easy!
 
 ## Step 2: Get Approved
 
@@ -44,7 +44,7 @@ See [[Running a Meeting]] for tips. For your first meeting:
 
 Hack Club provides:
 
-- Free Stickers & Posters!
+- Free [Stickers](https://forms.hackclub.com/stickers) & [Posters](https://hack.club/intl-posters)(is your club based in the US? you can get your posters [here](https://forms.hackclub.com/t/uzgyhTqvsFus))!
 - A slack channel for club leaders where you can get advice, ask for help, and tell us about your club!
 - Access to all [[Programs|HQ programs]]
 - And much more...
