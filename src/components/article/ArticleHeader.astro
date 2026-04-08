@@ -3,6 +3,7 @@ export interface Props {
   title: string;
   description: string;
   categories: string[];
+  banner?: string;
   stub?: boolean;
   lastEdited?: Date;
   author?: string;
@@ -12,6 +13,7 @@ const {
   title,
   description,
   categories,
+  banner,
   stub = false,
   lastEdited,
 } = Astro.props;
@@ -51,10 +53,12 @@ const formatDate = (d: Date) =>
     )
   }
 
-  <h1 class="article-title">{title}</h1>
+  {banner && <img src={banner} alt={title} class="article-banner" />}
 
-  {description && <p class="article-description">{description}</p>}
-
+  <div class="header-overlay">
+    <h1 class="article-title">{title}</h1>
+    {description && <p class="article-description">{description}</p>}
+  </div>
   <div class="article-meta">
     {
       categories.length > 0 && (
@@ -101,7 +105,22 @@ const formatDate = (d: Date) =>
   .article-header {
     margin-bottom: 2.25rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    background: var(--background);
+    transition:
+      background var(--transition-base),
+      border-color var(--transition-base);
+  }
+
+  .article-banner {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border);
+    display: block;
+    overflow: hidden;
   }
 
   .stub-notice {
@@ -134,21 +153,45 @@ const formatDate = (d: Date) =>
     font-weight: 700;
   }
 
+  .header-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 1.5rem;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      color-mix(in srgb, var(--background) 80%, transparent) 50%,
+      var(--background) 100%
+    );
+    backdrop-filter: blur(1px);
+    transition: background var(--transition-base);
+  }
+
   .article-title {
-    font-size: 2rem;
-    font-weight: 800;
     color: var(--text);
-    line-height: 1.15;
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.025em;
+    margin-bottom: 0.15rem;
+    font-size: 3rem;
+    font-weight: 800;
+    text-shadow:
+      1px 0 var(--background),
+      -1px 0 var(--background),
+      0 1px var(--background),
+      0 -1px var(--background),
+      1px 1px var(--background),
+      -1px -1px var(--background),
+      1px -1px var(--background),
+      -1px 1px var(--background);
+    transition:
+      color var(--transition-base),
+      text-shadow var(--transition-base);
   }
 
   .article-description {
-    color: var(--muted-2);
-    font-size: 1rem;
-    line-height: 1.65;
-    margin-bottom: 1.125rem;
-    max-width: 680px;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    transition: color var(--transition-base);
   }
 
   .article-meta {

@@ -12,7 +12,7 @@ const wiki = defineCollection({
     stub: z.boolean().default(false),
     featured: z.boolean().default(false),
     lastEdited: z.coerce.date().optional(),
-    image: z.string().optional(),
+    banner: z.string().optional(),
   }),
 });
 

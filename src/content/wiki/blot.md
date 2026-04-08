@@ -5,6 +5,7 @@ categories: ["Projects", "Hardware"]
 tags: ["blot", "hardware", "art", "ysws"]
 related: ["sprig", "hackathons"]
 stub: false
+banner: https://hackclub.com/stickers/hack-club-anime.png 
 ---
 
 # Blot

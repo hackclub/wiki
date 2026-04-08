@@ -4,6 +4,7 @@ description: The Hack Club Slack is the heart of the online community — 50,000
 categories: ["Community", "Tools"]
 tags: ["slack", "community", "chat"]
 related: ["getting-started", "scrapbook"]
+banner: https://hackclub.com/stickers/hack-club-anime.png 
 ---
 
 # Hack Club Slack

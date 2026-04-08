@@ -5,6 +5,7 @@ categories: ["Community", "Tools"]
 tags: ["scrapbook", "community", "updates"]
 related: ["slack", "ship"]
 stub: false
+banner: https://hackclub.com/stickers/hack-club-anime.png 
 ---
 
 # Scrapbook

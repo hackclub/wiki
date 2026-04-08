@@ -5,6 +5,7 @@ categories: ["Events", "Community"]
 tags: ["hackathon", "events", "competition"]
 featured: true
 related: ["starting-a-club", "slack"]
+banner: https://hackclub.com/stickers/hack-club-anime.png 
 ---
 
 # Hackathons

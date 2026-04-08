@@ -5,6 +5,7 @@ categories: ["Meta", "Community"]
 tags: ["beginner", "onboarding"]
 featured: true
 related: ["starting-a-club", "slack"]
+banner: https://hackclub.com/stickers/hack-club-anime.png 
 ---
 
 # Getting Started with Hack Club

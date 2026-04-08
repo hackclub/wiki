@@ -4,6 +4,7 @@ description: How to run engaging, productive Hack Club meetings that members act
 categories: ["Clubs"]
 tags: ["club", "meetings", "leadership"]
 related: ["starting-a-club", "workshops"]
+banner: https://hackclub.com/stickers/hack-club-anime.png 
 ---
 
 # Running a Meeting

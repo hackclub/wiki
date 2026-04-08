@@ -797,33 +797,35 @@ function getCatIcon(cat: string): string {
       transform var(--transition-base);
     cursor: pointer;
     position: relative;
+    z-index: 2;
     overflow: hidden;
   }
-
-  .featured-card::before {
+  .featured-card::after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--red), transparent);
+    inset: -1px;
+    border-radius: inherit;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, var(--red), transparent 50%) border-box;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
     opacity: 0;
     transition: opacity var(--transition-base);
+    pointer-events: none;
   }
 
   .featured-card:hover {
     border-color: var(--border-hover);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(236, 55, 80, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px);
   }
 
-  .featured-card:hover::before {
+  .featured-card:hover::after {
     opacity: 1;
   }
-
   .featured-card-top {
     display: flex;
     align-items: flex-start;

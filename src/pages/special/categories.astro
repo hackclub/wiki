@@ -33,13 +33,18 @@ const sortedCats = Object.keys(categories).sort((a, b) => a.localeCompare(b));
                 {catPages.length === 1 ? "article" : "articles"}
               </div>
               <ul class="cat-card-pages" aria-label={`Pages in ${cat}`}>
-                {catPages.slice(0, 4).map((p) => (
+                {catPages.slice(0, 2).map((p) => (
                   <li>{p.data.title}</li>
                 ))}
-                {catPages.length > 4 && (
-                  <li class="cat-card-more">+{catPages.length - 4} more</li>
+                {catPages.length > 2 && (
+                  <li class="cat-card-more">+{catPages.length - 2} more</li>
                 )}
               </ul>
+              <img
+                src="/public/the_thing_behind.png"
+                class="cat-card-corner-icon"
+              />
+              <img src="/public/orpheus_silly.png" class="cat-card-top-icon" />
             </a>
           );
         })
@@ -68,7 +73,7 @@ const sortedCats = Object.keys(categories).sort((a, b) => a.localeCompare(b));
 
   .cat-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
   }
 
@@ -83,6 +88,20 @@ const sortedCats = Object.keys(categories).sort((a, b) => a.localeCompare(b));
     transition:
       border-color 0.15s ease,
       transform 0.1s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cat-card-corner-icon {
+    width: 220px;
+    position: absolute;
+    bottom: -5px;
+    object-fit: cover;
+    right: -5px;
+    object-fit: contain;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
   }
 
   .cat-card:hover {
@@ -127,5 +146,31 @@ const sortedCats = Object.keys(categories).sort((a, b) => a.localeCompare(b));
   .cat-card-more {
     color: var(--blue);
     font-style: italic;
+  }
+
+  .cat-card-top-icon {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 150px;
+    z-index: 2;
+    pointer-events: none;
+    transition:
+      transform 0.3s ease-out,
+      opacity 0.2s ease;
+  }
+
+  .cat-card:hover .cat-card-top-icon {
+    transform: scale(1.05) rotate(-5deg);
+  }
+
+  .cat-card:hover .cat-card-corner-icon {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    .cat-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
