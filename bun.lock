@@ -5,6 +5,7 @@
     "": {
       "name": "hack-club-wiki",
       "dependencies": {
+        "hack-club-wiki": ".",
         "@hackclub/icons": "^0.2.2",
         "astro": "^6.1.3",
         "hack-club-wiki": ".",
