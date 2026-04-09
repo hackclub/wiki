@@ -9,15 +9,15 @@ banner: https://hackclub.com/stickers/hack-club-anime.png
 
 # Welcome to the Hack Club Wiki
 
-This is the official knowledge base for **Hack Club** — the global network of high school coding clubs. Whether you're starting a new club, running a hackathon, or just curious about the community, you'll find it here.
+This is the official knowledge base for **Hack Club** — the global network of 100,000+ high school hackers. Whether you're starting a new club, running a hackathon, or just curious about the community, you'll find it here.
 
 ## What is Hack Club?
 
-Hack Club is a worldwide network of high school coding clubs where members learn to code together, build real projects, and become part of a vibrant community of young makers.
+Hack Club is a worldwide network of teen hackers from around the world who code together, build real projects, and become part of a vibrant community of young makers.
 
-- 🌍 **600+ clubs** across 50+ countries
-- 💻 **50,000+ members** in our community
-- 🚀 **Free to start** — no experience required
+- 🌍 **1000+ clubs** across 95 countries!
+- 💻 **100,000+ members** in our community
+- 🚀 **Free to start**, no experience required
 
 ## Getting Started
 
