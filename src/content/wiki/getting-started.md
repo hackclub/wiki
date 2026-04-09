@@ -22,7 +22,7 @@ The Hack Club [[Slack]] is where most of the community hangs out. It has over 10
 
 ## 2. Find or Start a Club
 
-Check if there's already a [club near you](https://hackclub.com/map/). If not, you can [[Starting a Club|start one]] — it's free!
+Check if there's already a [club near you](https://hackclub.com/map/). If not, you can [start one](https://wiki hackclub.com/wiki/starting-a-club/) — it's free!
 
 ## 3. Build Something
 
