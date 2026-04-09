@@ -12,26 +12,26 @@ banner: https://hackclub.com/stickers/hack-club-anime.png
 
 Welcome! If you're brand new to Hack Club, this is the right place. Here's how to get plugged in.
 
-## Step 1: Join the Slack
+## 1. Join the Slack
 
 The Hack Club [[Slack]] is where most of the community hangs out. It has over 100,000 members and hundreds of channels for every interest.
 
-1. Go to [hackclub.com/slack](https://hackclub.com/slack)
-2. Sign up
-3. Introduce yourself in `#welcome`
+- Go to [hackclub.com/slack](https://hackclub.com/slack)
+- Sign up
+- Introduce yourself in [`#welcome`](https://hackclub.enterprise.slack.com/archives/C75M7C0SY)
 
-## Step 2: Find or Start a Club
+## 2. Find or Start a Club
 
-Check if there's already a [[Clubs|club at your school]]. If not, you can [[Starting a Club|start one]] — it's free!
+Check if there's already a [club near you](https://hackclub.com/map/). If not, you can [[Starting a Club|start one]] — it's free!
 
-## Step 3: Build Something
+## 3. Build Something
 
 The best way to learn is by building. Check out:
 
 - [ysws.hackclub.com](https://ysws.hackclub.com) — You Ship a Project, We ship rewards!
 - [[Sprig]] — make a game and get a free console :D
 
-## Step 4: Share What You Build
+## 4. Share What You Build
 
 Every Hack Clubber is encouraged to [[Ship]] their work. Post it to [[Scrapbook]], our daily update feed.
 
