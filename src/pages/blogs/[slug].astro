@@ -1,0 +1,111 @@
+---
+import Base from "../../layouts/Base.astro";
+import { formatBlogDate, renderBlogBody } from "../../lib/blog";
+import { getPublishedBlogPostBySlug } from "../../lib/db";
+
+export const prerender = false;
+
+const post = await getPublishedBlogPostBySlug(Astro.params.slug ?? "");
+
+if (!post) {
+  return new Response("Blog post not found.", { status: 404 });
+}
+
+const authorName = post.author_name ?? post.author_email ?? "Hack Clubber";
+const avatarUrl = post.author_avatar_url ?? post.author_picture;
+const bodyHtml = renderBlogBody(post.body);
+---
+
+<Base title={post.title} description={post.excerpt ?? `A blog post by ${authorName}.`}>
+  <main class="post-page">
+    <article>
+      <header class="post-header">
+        <a href="/blogs" class="back-link">Blogs</a>
+        <h1>{post.title}</h1>
+        {post.excerpt ? <p class="post-excerpt">{post.excerpt}</p> : null}
+        <div class="post-meta">
+          {avatarUrl ? (
+            <img src={avatarUrl} alt="" class="post-avatar" width="40" height="40" />
+          ) : null}
+          <div>
+            <p>{authorName}</p>
+            <time datetime={post.published_at}>
+              {formatBlogDate(post.published_at)}
+            </time>
+          </div>
+        </div>
+      </header>
+
+      <div class="post-body" set:html={bodyHtml}></div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  .post-page {
+    width: min(820px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 2.5rem 0 4rem;
+  }
+
+  .back-link {
+    color: var(--text-muted);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    margin: 0.75rem 0;
+    font-size: clamp(2.1rem, 5vw, 4rem);
+    line-height: 1.05;
+  }
+
+  .post-excerpt {
+    margin: 0 0 1.25rem;
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    line-height: 1.55;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .post-meta p {
+    margin: 0;
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .post-avatar {
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .post-body {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .post-body :global(p),
+  .post-body :global(ul) {
+    margin: 0 0 1.1rem;
+  }
+
+  .post-body :global(h2),
+  .post-body :global(h3) {
+    margin: 2rem 0 0.75rem;
+    line-height: 1.2;
+  }
+
+  .post-body :global(ul) {
+    padding-left: 1.4rem;
+  }
+</style>

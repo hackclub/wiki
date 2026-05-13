@@ -1,0 +1,210 @@
+---
+import Base from "../layouts/Base.astro";
+import {
+  getSessionFromCookie,
+  isAdminSession,
+  getAdminHost,
+} from "../lib/auth";
+
+export const prerender = false;
+
+const hostHeader = Astro.request.headers.get("host") ?? "";
+const host = hostHeader.split(":")[0];
+const adminHost = getAdminHost();
+const onAdminHost = host === adminHost;
+const session = getSessionFromCookie(Astro.request.headers.get("cookie"));
+const isAdmin = isAdminSession(session);
+const displayName = session?.name ?? session?.email ?? "Guest";
+const adminUrl = `https://${adminHost}/admin`;
+const wikiUrl = "https://wiki.hackclub.com";
+---
+
+<Base title="Admin Control Panel" description="Admin control panel for the Hack Club Wiki.">
+  <main class="admin-page">
+    <section class="admin-hero">
+      <div class="admin-hero-inner">
+        <p class="eyebrow">Admin control panel</p>
+        <h1>Wiki admin control</h1>
+        <p class="admin-description">
+          Manage the Hack Club Wiki from the admin subdomain. Sign in with an authorized admin account.
+        </p>
+
+        {onAdminHost ? (
+          session ? (
+            isAdmin ? (
+              <div class="admin-status-card">
+                <p>
+                  Signed in as <strong>{displayName}</strong>.
+                </p>
+                <p class="admin-ready">
+                  You have access to admin controls for this wiki.
+                </p>
+                <div class="admin-actions">
+                  <a href="/auth/logout" class="admin-btn admin-btn--secondary">
+                    Sign out
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <div class="admin-status-card admin-status-warning">
+                <p>
+                  Signed in as <strong>{displayName}</strong>, but your account is not authorized for admin access.
+                </p>
+                <p>Ask a site owner to add your email to ADMIN_EMAILS.</p>
+                <a href="/auth/logout" class="admin-btn admin-btn--secondary">
+                  Sign out
+                </a>
+              </div>
+            )
+          ) : (
+            <div class="admin-status-card">
+              <p>Sign in with Hack Club to continue.</p>
+              <a href="/auth/login" class="admin-btn admin-btn--primary">Sign in</a>
+            </div>
+          )
+        ) : (
+          <div class="admin-status-card admin-status-warning">
+            <p>
+              This admin panel is intended for <strong>{adminHost}</strong>.
+            </p>
+            <a href={adminUrl} class="admin-btn admin-btn--primary">Go to admin panel</a>
+          </div>
+        )}
+      </div>
+    </section>
+
+    {onAdminHost && isAdmin ? (
+      <section class="admin-grid">
+        <article class="admin-card">
+          <h2>Content controls</h2>
+          <p>Review published wiki content, manage page metadata, and keep the site updated.</p>
+          <a href="/special/all-pages" class="admin-link">Browse wiki pages</a>
+        </article>
+
+        <article class="admin-card">
+          <h2>Session info</h2>
+          <p>Signed in with <strong>{session?.email}</strong>.</p>
+          <p>Sub: {session?.sub}</p>
+        </article>
+      </section>
+    ) : null}
+
+    <div class="admin-footer">
+      <a href={wikiUrl}>Back to the main wiki</a>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .admin-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+
+  .admin-hero {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--sunken);
+    margin-bottom: 1.5rem;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 3vw, 3rem);
+  }
+
+  .admin-description {
+    margin: 1rem 0 0;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .admin-status-card {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--elevated);
+  }
+
+  .admin-status-warning {
+    border-color: var(--accent);
+    background: rgba(236, 55, 80, 0.08);
+  }
+
+  .admin-ready {
+    margin: 0.75rem 0 0;
+    color: var(--text);
+  }
+
+  .admin-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .admin-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.15rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .admin-btn--primary {
+    background: var(--brand);
+    color: white;
+  }
+
+  .admin-btn--secondary {
+    background: var(--elevated);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .admin-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .admin-card {
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    background: var(--elevated);
+    border: 1px solid var(--border);
+  }
+
+  .admin-card h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+  }
+
+  .admin-link {
+    color: var(--brand);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .admin-footer {
+    margin-top: 2rem;
+  }
+
+  .admin-footer a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+</style>

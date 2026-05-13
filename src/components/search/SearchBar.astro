@@ -1,4 +1,5 @@
 ---
+const { query = "" } = Astro.props;
 // Pagefind search UI wrapper
 // Only renders on the client; Pagefind bundle is in /pagefind/ after build.
 ---
@@ -58,7 +59,8 @@
   }
 </style>
 
-<script>
+<script is:inline>
+  const initialQuery = ${JSON.stringify(query)};
   // Load Pagefind UI asynchronously (only exists post-build)
   async function initSearch() {
     try {
@@ -68,12 +70,23 @@
       const { PagefindUI } = await import(
         /* @vite-ignore */ "/pagefind/pagefind-ui.js"
       );
-      new PagefindUI({
+      const ui = new PagefindUI({
         element: "#pagefind-search",
         showSubResults: true,
         showImages: false,
         resetStyles: false,
       });
+
+      const query = initialQuery || new URLSearchParams(window.location.search).get("q");
+      if (query) {
+        const input = document.querySelector(".pagefind-ui__search-input");
+        if (input) {
+          input.value = query;
+          input.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+      }
+
+      return ui;
     } catch {
       const el = document.getElementById("pagefind-search");
       if (el) {

@@ -1,25 +1,27 @@
-# use the official Bun image
-# see all versions at https://hub.docker.com/r/oven/bun/tags
 # -------- Build stage --------
-FROM oven/bun:1 AS builder
+FROM node:22-slim AS builder
 WORKDIR /app
 
-COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile
+COPY package.json package-lock.json ./
+RUN npm ci
 
 COPY . .
 
-RUN bun run build
+RUN npm run build && cp -R dist/pagefind dist/client/pagefind
 
-FROM oven/bun:1 AS runner
+FROM node:22-slim AS runner
 WORKDIR /app
 
-RUN bun add serve
+ENV HOST=0.0.0.0
+ENV PORT=3000
+
+COPY package.json package-lock.json ./
+RUN npm ci
 
 COPY --from=builder /app/dist ./dist
 
-USER bun
+USER node
 
 EXPOSE 3000
 
-CMD ["bunx", "serve", "dist", "-l", "3000"]
+CMD ["node", "dist/server/entry.mjs"]

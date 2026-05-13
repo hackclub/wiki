@@ -1,0 +1,164 @@
+---
+import Base from "../../layouts/Base.astro";
+import { formatBlogDate } from "../../lib/blog";
+import { getPublishedBlogPosts } from "../../lib/db";
+
+export const prerender = false;
+
+const posts = await getPublishedBlogPosts();
+---
+
+<Base title="Blogs" description="Community blog posts from Hack Club Wiki.">
+  <main class="blogs-page">
+    <header class="blogs-header">
+      <div>
+        <p class="blogs-eyebrow">Community blogs</p>
+        <h1>Published posts</h1>
+      </div>
+      <a href="/blogs/write" class="write-link">Write a blog</a>
+    </header>
+
+    {posts.length > 0 ? (
+      <section class="posts-list" aria-label="Published blog posts">
+        {posts.map((post) => (
+          <article class="post-card">
+            <div class="post-meta">
+              {post.author_avatar_url || post.author_picture ? (
+                <img
+                  src={post.author_avatar_url ?? post.author_picture}
+                  alt=""
+                  class="post-avatar"
+                  width="36"
+                  height="36"
+                />
+              ) : null}
+              <div>
+                <p>{post.author_name ?? post.author_email ?? "Hack Clubber"}</p>
+                <time datetime={post.published_at}>
+                  {formatBlogDate(post.published_at)}
+                </time>
+              </div>
+            </div>
+            <h2><a href={`/blogs/${post.slug}`}>{post.title}</a></h2>
+            {post.excerpt ? <p class="post-excerpt">{post.excerpt}</p> : null}
+          </article>
+        ))}
+      </section>
+    ) : (
+      <section class="empty-state">
+        <h2>No posts yet</h2>
+        <p>Published blog posts will show up here.</p>
+        <a href="/blogs/write">Write the first one</a>
+      </section>
+    )}
+  </main>
+</Base>
+
+<style>
+  .blogs-page {
+    width: min(980px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 2.5rem 0 4rem;
+  }
+
+  .blogs-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .blogs-eyebrow {
+    margin: 0 0 0.35rem;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 2.4rem;
+    line-height: 1.1;
+  }
+
+  .write-link,
+  .empty-state a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    background: var(--button-primary);
+    color: white;
+    font-weight: 700;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .posts-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .post-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--elevated);
+    padding: 1.25rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .post-meta p {
+    margin: 0;
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .post-avatar {
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .post-card h2 {
+    margin: 0.9rem 0 0.45rem;
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  .post-card h2 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .post-excerpt {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  .empty-state {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--elevated);
+    padding: 1.5rem;
+  }
+
+  .empty-state h2,
+  .empty-state p {
+    margin: 0 0 0.75rem;
+  }
+
+  @media (max-width: 640px) {
+    .blogs-header {
+      flex-direction: column;
+    }
+  }
+</style>

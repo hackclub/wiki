@@ -3,6 +3,9 @@ import Base from "../../layouts/Base.astro";
 import WikiLayout from "../../components/layout/WikiLayout.astro";
 import Breadcrumb from "../../components/layout/Breadcrumb.astro";
 import SearchBar from "../../components/search/SearchBar.astro";
+
+const url = new URL(Astro.url.href);
+const query = url.searchParams.get("q") ?? "";
 ---
 
 <Base title="Search" description="Search all Hack Club Wiki articles.">
@@ -14,7 +17,7 @@ import SearchBar from "../../components/search/SearchBar.astro";
       <p class="special-desc">Full-text search across all wiki articles.</p>
     </header>
 
-    <SearchBar />
+    <SearchBar query={query} />
   </WikiLayout>
 </Base>
 
