@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@hackclub/icons": "^0.2.2",
-    "astro": "^6.1.10",
+    "astro": "^6.4.6",
     "dotenv": "^17.4.2",
     "hack-club-wiki": ".",
     "pg": "^8.11.2",
